@@ -14,19 +14,22 @@ class Load
     end
   end
 
-  def save
-    redis_client = Redis.new
-    redis_client.set self.uuid , self.to_json
+  def save 
+    Redis.new.set self.uuid , self.to_json
   end
 
   def self.find(uuid)
-    redis_client = Redis.new
-    string_object = redis_client.get (uuid)
+    string_object = Redis.new.get (uuid)
     return string_object.nil? ? nil : ( Load.new JSON.parse ( string_object ) )
   end
 
   def self.first
-    Load.new JSON.parse ( Redis.new.get (redis_client.keys.first) )
+    redis_client = Redis.new
+    Load.new JSON.parse ( redis_client.get (redis_client.keys.first) )
+  end
+
+  def self.delete_all
+    Redis.new.flushall
   end
 
 end
