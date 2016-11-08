@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get  '/about', to: 'static_pages#about'
   get  '/main', to: 'static_pages#main'
   get  '/loads/new', to: 'loads#new'
+  resources :loads
 end

@@ -19,25 +19,25 @@
 	src: url("digital.woff");
 }
 h1.main {
-	left: 0;
-	line-height: 200px;
+	left: 25%;
+	line-height: 1;
 	margin-top: -100px;
 	position: absolute;
 	text-align: center;
 	top: 50%;
-	width: 100%;
+	width: 50%;
 	font-family: Template;
 	color: white;
 }
 
 h1.loadinfo{
-	left: 0;
-	line-height: 200px;
-	margin-top: -200px;
+	left: 25%;
+	line-height: 1;
+	margin-top: -100px;
 	position: absolute;
 	text-align: center;
 	top: 50%;
-	width: 100%;
+	width: 50%;
 	font-family: Template;
 	color: white;
 }
@@ -73,6 +73,7 @@ h1{
 	font-family: Template;
     color: white;
 }
+
 
 body {
 	/*background-image: url('result_2.jpg');*/
