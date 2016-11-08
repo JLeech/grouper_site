@@ -30,6 +30,18 @@ h1.main {
 	color: white;
 }
 
+h1.loadinfo{
+	left: 0;
+	line-height: 200px;
+	margin-top: -200px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 100%;
+	font-family: Template;
+	color: white;
+}
+
 nav{
 	left: 0;
 	line-height: 200px;

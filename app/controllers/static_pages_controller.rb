@@ -8,8 +8,4 @@ class StaticPagesController < ApplicationController
 	
 	end
 
-	def load
-		
-	end
-
 end
