@@ -56,13 +56,12 @@ nav{
 
 li.nav {
 	list-style-type: none;
-	margin: 10px 0; 
-	line-height: 4;
+	margin: 5px 0; 
+	line-height: 2;
 }
 a.menu {
 	font-family: Template;
 	color: white;
-	text-decoration: none;
 }
 
 a{
@@ -76,5 +75,6 @@ h1{
 }
 
 body {
-	background-image: url('result_2.jpg');
+	/*background-image: url('result_2.jpg');*/
+	background-color: black;
 }
