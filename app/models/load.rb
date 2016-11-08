@@ -25,7 +25,7 @@ class Load
 
   def self.first
     redis_client = Redis.new
-    Load.new JSON.parse ( redis_client.get (redis_client.keys.first) )
+    return redis_client.keys.blank? ? nil : ( Load.new JSON.parse ( redis_client.get (redis_client.keys.first) ) )
   end
 
   def self.delete_all
