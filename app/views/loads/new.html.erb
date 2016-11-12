@@ -1,9 +1,22 @@
 
 <nav>
   <ul class='nav'>
-    <li class='nav'> <h1> <%= link_to "back", main_path %> </h1> </li>
+    <li class='nav'> <h1> <%= link_to "back", main_path, { :class => "menu"}  %> </h1> </li>
   </ul>
 </nav>
 
-<h1 class='loadinfo'> we support orthologs files in txt format from NCBI Annotation Pipeline </h1>
+<div class='loadinfo'>  
+        <%= form_for(@load,  :html => {:class => "load form-horizontal center"} ) do |f| %>  
+                <div class="form-group">
+                    <%= f.label :email %>
+                    <%= f.text_field :email, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                    <%= f.label :file, "NCBI annotation pipeline file"%>
+                    <%= f.file_field :file, class: "form-control"  %>
+                </div>
+                <%= f.submit "load", class: "btn " %>
+        <% end %>
+</div>
 
+ 

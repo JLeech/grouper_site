@@ -1,12 +1,12 @@
 
 <% if @load.nil?  %>
-	<h1 class='loadinfo'> user not found </h1>
+	<h1 class='loadinfo'> load not found </h1>
 <% else %>
 	<h1 class='loadinfo'> state: <%= @load.state %> </h1>
 <% end %>
 
 <nav>
   <ul class='nav'>
-    <li class='nav'> <h1> <%= link_to "back", main_path %> </h1> </li>
+    <li class='nav'> <h1> <%= link_to "back", main_path ,{ :class => "menu"} %> </h1> </li>
   </ul>
 </nav>

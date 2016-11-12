@@ -1,0 +1,90 @@
+
+@import "bootstrap";
+
+@font-face {
+	font-family: Template;
+	src: url("digital.woff");
+}
+
+h1{
+	font-family: Template;
+    color: white;
+}
+
+h1.main {
+	left: 25%;
+	line-height: 1;
+	margin-top: -100px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 50%;
+	font-family: Template;
+	color: white;
+}
+
+div.loadinfo{
+	margin-top: -50px;
+}
+h1.loadinfo{
+	left: 25%;
+	line-height: 1;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 50%;
+	font-family: Template;
+	color: white;
+}
+
+form.load {
+	left: 25%;
+	line-height: 1;
+	position: absolute;
+	text-align: left;
+	top: 40%;
+	width: 30%;
+	font-family: Template;
+	color: white;
+}
+
+nav{
+	left: 0;
+	line-height: 200px;
+	margin-top: -300px;
+	margin-left: 50px;
+	position: absolute;
+	text-align: left;
+	top: 50%;
+	width: 100%;
+
+}
+
+li.nav {
+	list-style-type: none;
+	margin: 10px 0; 
+	line-height: 2;
+}
+
+li.load{
+	list-style-type: none;
+	margin: left; 
+	line-height: 2;	
+}
+
+a{
+	font-family: Template;
+	color: white;	
+}
+
+a.menu {
+	font-family: Template;
+	color: white;
+}
+
+
+
+body {
+	/*background-image: url('result_2.jpg');*/
+	background-color: black;
+}
