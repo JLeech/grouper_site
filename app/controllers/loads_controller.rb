@@ -1,26 +1,23 @@
 class LoadsController < ApplicationController
   
   def new
-    @uid = SecureRandom.hex(10)
     @load = Load.new
   end
 
   def show
-    @load = Load.find_by_uid( params[:id] )
+    @state = Load.get_state(params[:id])
   end
 
   def create
     @load = Load.new(load_params)
-    #upload
-  end
-
-  def upload
-    uploaded_io = params[:load][:file]
-    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
-      file.write(uploaded_io.read)
+    @load.save_file(params)
+    if @load.save!
+      @load.update_redis
+      redirect_to action: "show", id: @load.id
+    else
+      redirect_to action: 'new'
     end
   end
-
 
   private
 
