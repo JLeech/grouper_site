@@ -13,6 +13,7 @@ class LoadsController < ApplicationController
     @load.save_file(params)
     if @load.save!
       @load.update_redis
+      @load.start
       redirect_to action: "show", id: @load.id
     else
       redirect_to action: 'new'

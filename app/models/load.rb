@@ -9,7 +9,7 @@ class Load
 
   def save_file(params)
     uploaded_io = params[:load][:file]
-    File.open(Rails.root.join('public', 'uploads', self.id), 'wb') do |file|
+    File.open(Rails.root.join(PipelineManager::UPLOAD_PATH, self.id), 'wb') do |file|
       file.write(uploaded_io.read)
     end
   end
@@ -17,6 +17,10 @@ class Load
   def update_redis(state = CREATED)
     redis_client = Redis.new
     redis_client.set self.id, state
+  end
+
+  def start
+    PipelineManager.new(self.id).get_gene_location
   end
 
   def self.get_state(id)
@@ -31,5 +35,16 @@ class Load
     end
     return current_state
   end
+
+  def self.update_state!(id, state)
+    load = Load.find(id)
+    load.state = state
+    load.save!
+
+    redis_client = Redis.new
+    redis_client.set id, state
+  end
+
+
 
 end
