@@ -20,7 +20,7 @@ class Load
   end
 
   def start
-    PipelineManager.new(self.id).get_gene_location
+    PipelineManagerJob.perform_later self.id.to_s
   end
 
   def self.get_state(id)
@@ -45,6 +45,9 @@ class Load
     redis_client.set id, state
   end
 
-
+  def self.clear_all
+    Load.delete_all
+    Redis.new.flushall
+  end
 
 end
