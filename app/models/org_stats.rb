@@ -1,0 +1,3 @@
+class OrgStats < ApplicationRecord
+
+end

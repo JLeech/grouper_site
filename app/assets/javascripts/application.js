@@ -11,6 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+ //= require tether
 //= require jquery_ujs
+//= require jquery-ui
+//= require bootstrap
 //= require turbolinks
+//= require tabulator
+//= require bootstrapmultiselect
 //= require_tree .
+
+
