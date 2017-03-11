@@ -56,7 +56,8 @@ $(document).on("turbolinks:load", function() {
     ],
     data: tabledata,
     movableRows: true,
-    movableCols: true
+    movableCols: true,
+    fitColumns: true
   });
   $('#orgfields').multiselect({
     buttonWidth: '200px',
