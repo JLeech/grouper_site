@@ -10,99 +10,7 @@ html {
   font-size: 15px;
 }
 
-h1{
-	font-family: Template;
-    color: black;
-}
 
-div.orgfields{
-  margin-top: 20px;
-  width:200px;
-}
-
-ul.dropdown-menu{
-  width:200px;
-  vertical-align: center;
-}
-
-h1.main {
-	left: 25%;
-	line-height: 1;
-	margin-top: -100px;
-	position: absolute;
-	text-align: center;
-	top: 50%;
-	width: 50%;
-	font-family: Template;
-	color: black;
-}
-
-div.loadinfo{
-	margin-top: -50px;
-}
-
-div.ex_table{
-	font-size: 10px;
-  margin-top: 50px;
-}
-
-
-
-h1.loadinfo{
-	left: 25%;
-	line-height: 1;
-	position: absolute;
-	text-align: center;
-	top: 50%;
-	width: 50%;
-	font-family: Template;
-	color: black;
-}
-
-form.load {
-	left: 25%;
-	line-height: 1;
-	position: absolute;
-	text-align: left;
-	top: 40%;
-	width: 30%;
-	font-family: Template;
-	color: black;
-}
-
-nav{
-	left: 0;
-	line-height: 200px;
-	margin-top: -300px;
-	margin-left: 50px;
-	position: absolute;
-	text-align: left;
-	top: 50%;
-	width: 100%;
-
-}
-
-li.nav {
-	list-style-type: none;
-	margin: 10px 0; 
-	line-height: 2;
-}
-
-li.load{
-	list-style-type: none;
-	margin: left; 
-	line-height: 2;	
-}
-
-a.submenu{
-	font-family: Template;
-	color: black;	
-}
-
-a.menu {
-	font-family: Template;
-	color: black;
-}
 
 span.multiselect-native-select{position:relative}span.multiselect-native-select select{border:0!important;clip:rect(0 0 0 0)!important;height:1px!important;margin:-1px -1px -1px -3px!important;overflow:hidden!important;padding:0!important;position:absolute!important;width:1px!important;left:50%;top:30px}.multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0}.multiselect-container .input-group{margin:5px}.multiselect-container>li{padding:0}.multiselect-container>li>a.multiselect-all label{font-weight:700}.multiselect-container>li.multiselect-group label{margin:0;padding:3px 20px 3px 20px;height:100%;font-weight:700}.multiselect-container>li.multiselect-group-clickable label{cursor:pointer}.multiselect-container>li>a{padding:0}.multiselect-container>li>a>label{margin:0;height:100%;cursor:pointer;font-weight:400;padding:3px 20px 3px 40px}.multiselect-container>li>a>label.radio,.multiselect-container>li>a>label.checkbox{margin:0}.multiselect-container>li>a>label>input[type=checkbox]{margin-bottom:5px}.btn-group>.btn-group:nth-child(2)>.multiselect.btn{border-top-left-radius:4px;border-bottom-left-radius:4px}.form-inline .multiselect-container label.checkbox,.form-inline .multiselect-container label.radio{padding:3px 20px 3px 40px}.form-inline .multiselect-container li a label.checkbox input[type=checkbox],.form-inline .multiselect-container li a label.radio input[type=radio]{margin-left:-20px;margin-right:0}
 
@@ -453,3 +361,101 @@ span.multiselect-native-select{position:relative}span.multiselect-native-select 
   font-size: 16px;
   color: #590000;
 }
+
+
+
+h1{
+	font-family: Template;
+    color: black;
+}
+
+div.load_button{
+  padding-left: 40px;
+}
+
+div#column_headers{
+  padding: 40px;
+}
+
+h1.main {
+	left: 25%;
+	line-height: 1;
+	margin-top: -100px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 50%;
+	font-family: Template;
+	color: black;
+}
+
+div.loadinfo{
+	margin-top: -50px;
+}
+
+div.ex_table{
+	font-size: 10px;
+  margin-top: 50px;
+}
+
+button.header_butt{
+  font-size: 12px;
+}
+
+h1.loadinfo{
+	left: 25%;
+	line-height: 1;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 50%;
+	font-family: Template;
+	color: black;
+}
+
+form.load {
+	left: 25%;
+	line-height: 1;
+	position: absolute;
+	text-align: left;
+	top: 40%;
+	width: 30%;
+	font-family: Template;
+	color: black;
+}
+
+nav{
+	left: 0;
+	line-height: 200px;
+	margin-top: -300px;
+	margin-left: 50px;
+	position: absolute;
+	text-align: left;
+	top: 50%;
+	width: 100%;
+
+}
+
+li.nav {
+	list-style-type: none;
+	margin: 10px 0; 
+	line-height: 2;
+}
+
+li.load{
+	list-style-type: none;
+	margin: left; 
+	line-height: 2;	
+}
+
+a.submenu{
+	font-family: Template;
+	color: black;	
+}
+
+a.menu {
+	font-family: Template;
+	color: black;
+}
+
+
