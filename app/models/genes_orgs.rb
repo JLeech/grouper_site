@@ -1,0 +1,3 @@
+class GenesOrgs < ApplicationRecord
+
+end

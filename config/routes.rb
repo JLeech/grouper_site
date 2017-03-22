@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   get  '/main', to: 'static_pages#main'
   get  '/organisms', to: 'static_pages#organisms'
   get  '/loads/new', to: 'loads#new'
+
+  get  '/gene_names', to: 'api#gene_names'
+  get  '/organism_names', to: 'api#organism_names'
   resources :loads
 end
