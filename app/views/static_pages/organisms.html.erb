@@ -1,37 +1,76 @@
+<%= render "header" %>
+
+<div id="outer_center">
+
+    <div id="inner_center">
+
+        <ul class="nav nav-tabs tabs-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#organisms" role="tab">Organisms</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#organism_settings" role="tab">Organism table settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#genes" role="tab">Genes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#other" role="tab">Other</a>
+          </li>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="organisms" role="tabpanel">
+
+
+                <div class="ex_table" id="example-table" ></div> 
+                <div class="btn-group column_headers" data-toggle="buttons">
+                  <button id="load_button" data-toggle="tooltip" data-placement="top" title="Download table as CSV" type="button" class="btn btn-secondary">Download table</button>
+                  <button id="clear_filter" data-toggle="tooltip" data-placement="top" title="Clear all table filters" type="button" class="btn btn-secondary">Clear filters</button>
+                </div>
+            </div>
+            <div class="tab-pane" id="genes" role="tabpanel">
+              <div id="selected_organisms_names">
+
+              </div>
+            </div>
+            <div class="tab-pane" id="organism_settings" role="tabpanel">
+
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="card">
+                        <div class="card-header" role="tab" id="show_headers">
+                          <h5 class="mb-0">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Show/hide table columns
+                            </a>
+                          </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="show_headers">
+                          <div class="card-block">
+                            <%= render "table_headers" %> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header" role="tab" id="show_headers">
+                          <h5 class="mb-0">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#org_filter" aria-expanded="true" aria-controls="org_filter">
+                              Table filters
+                            </a>
+                          </h5>
+                        </div>
+                        <div id="org_filter" class="collapse show" role="tabpanel" aria-labelledby="show_headers">
+                          <div class="card-block">
+                            XXXXXXXXXXXXXXXXXXXx                        
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
 <div>
-
-    <div id="column_headers" class="btn-group column_headers" data-toggle="buttons">
-        <button onclick="column_hide('name',this)" data-toggle="tooltip" data-placement="top" title="Latin name of the organism" id="header_butt" type="button" class="btn btn-success header_butt"> Name </button>
-        <button onclick="column_hide('tax',this)" data-toggle="tooltip" data-placement="top" title="Taxonomy" id="header_butt" type="button" class="btn btn-success header_butt"> Tax </button>
-        <button onclick="column_hide('common_name',this)" data-toggle="tooltip" data-placement="top" title="English name of the organism" id="header_butt" type="button" class="btn btn-success header_butt"> Common name </button>
-        <button onclick="column_hide('version',this)" data-toggle="tooltip" data-placement="top" title="Version of NCBI Annotation release" id="header_butt" type="button" class="btn btn-success header_butt"> Annotation version </button>
-        <button onclick="column_hide('date',this)" data-toggle="tooltip" data-placement="top" title="Date of NCBI Annotation release" id="header_butt" type="button" class="btn btn-success header_butt"> Annotation date </button>
-        <button onclick="column_hide('gene_count',this)" data-toggle="tooltip" data-placement="top" title="Number of genes" id="header_butt" type="button" class="btn btn-success header_butt"> #Genes </button>
-        <button onclick="column_hide('iso_count',this)" data-toggle="tooltip" data-placement="top" title="Number of isoforms" id="header_butt" type="button" class="btn btn-success header_butt"> #Isoforms </button>
-        <button onclick="column_hide('exon_count',this)" data-toggle="tooltip" data-placement="top" title="Number of exons" id="header_butt" type="button" class="btn btn-success header_butt"> #Exons </button>
-        <button onclick="column_hide('intron_count',this)" data-toggle="tooltip" data-placement="top" title="Number of introns without errors" id="header_butt" type="button" class="btn btn-success header_butt"> #Introns </button>
-        <button onclick="column_hide('intron_with_error',this)" data-toggle="tooltip" data-placement="top" title="Number of introns with annotation errors" id="header_butt" type="button" class="btn btn-success header_butt"> Broken introns </button>
-        <button onclick="column_hide('phase_0_count',this)" data-toggle="tooltip" data-placement="top" title="Number of introns with 0 phase (only correct introns)" id="header_butt" type="button" class="btn btn-success header_butt"> #Phase 0 </button>
-        <button onclick="column_hide('phase_1_count',this)" data-toggle="tooltip" data-placement="top" title="Number of introns with 1 phase (only correct introns)" id="header_butt" type="button" class="btn btn-success header_butt"> #Phase 1 </button>
-        <button onclick="column_hide('phase_2_count',this)" data-toggle="tooltip" data-placement="top" title="Number of introns with 2 phase (only correct introns)" id="header_butt" type="button" class="btn btn-success header_butt"> #Phase 2 </button>
-        <button onclick="column_hide('phase_0_persent',this)" data-toggle="tooltip" data-placement="top" title="Percent of introns with phase 0 (only correct introns)" id="header_butt" type="button" class="btn btn-success header_butt"> %Phase 0 </button>
-        <button onclick="column_hide('phase_1_persent',this)" data-toggle="tooltip" data-placement="top" title="Percent of introns with phase 1 (only correct introns)" id="header_butt" type="button" class="btn btn-success header_butt"> %Phase 1 </button>
-        <button onclick="column_hide('phase_2_persent',this)" data-toggle="tooltip" data-placement="top" title="Percent of introns with phase 2 (only correct introns)" id="header_butt" type="button" class="btn btn-success header_butt"> %Phase 2 </button>
-    </div>
-    
-    <div id="column_headers" class="btn-group column_headers" data-toggle="buttons">
-            <button id="load_button" data-toggle="tooltip" data-placement="top" title="Download table as CSV" type="button" class="btn btn-secondary">Download table</button>
-            <button id="clear_filter" data-toggle="tooltip" data-placement="top" title="Clear all table filters" type="button" class="btn btn-secondary">Clear filters</button>
-    </div>
-
-
-</div>
-
-
-
-<div class="organism_input">
-    <input class="typeahead form-control organism_input" data-toggle="tooltip" data-placement="top" title="Select organism to show" type="text">
-</div>
-
-<div class="ex_table" id="example-table" ></div>
-

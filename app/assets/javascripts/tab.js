@@ -91,10 +91,13 @@ var tabledata = [
   {id: 103, name: "Ziziphus jujuba", common_name:"fruit bearing tree", tax:"Land Plants", version:"Release 100", date:"2016-03-24", gene_count:"33324", iso_count:"37526", exon_count:"205354", intron_count:"163407", intron_with_error:"4517", phase_0_count:"91219", phase_1_count:"36363", phase_2_count:"35825", phase_0_persent:"55.8", phase_1_persent:"22.3", phase_2_persent:"21.9"},
 ];
 
+var selected_organisms_ids = [];
+var selected_organisms_names = [];
+
 $(document).on("turbolinks:load", function() {
   $("#example-table").tabulator({
     fitColumns:true, //fit columns to width of table (optional)
-    columns:[ //Define Table Columns
+    columns:[ //Define Table Colum
         { title: "Name", field: "name", sorter: "string", align: "left", frozen:"true"},
         { title: "Tax", field: "tax", sorter: "string", align: "left"},
         { title: "Common name", field: "common_name", sorter: "string", align: "left"},
@@ -113,11 +116,10 @@ $(document).on("turbolinks:load", function() {
         { title: "%Phase 2", field: "phase_2_persent", sorter: "number", align: "right"},
     ],
     data: tabledata,
-    pagination:"local",
-    paginationSize:20,
     movableRows: true,
     movableCols: true,
-    fitColumns: true
+    height:"700px",
+    selectable:true,
   });
 
   $('#load_button').on('click', function (e) {
@@ -128,24 +130,31 @@ $(document).on("turbolinks:load", function() {
     $("#example-table").tabulator("clearFilter");
   });
 
-
-  $('input.gene_input').typeahead({
-    ajax: {
-      url: '/gene_names',
-      triggerLength: 1,
+  $("#example-table").tabulator({
+    rowSelectionChanged:function(data, rows){
+      selected_organisms_ids = Array.prototype.map.call(data, function(x) { return x.id; });
+      selected_organisms_names = Array.prototype.map.call(data, function(x) { return x.name; });
+      $('#selected_organisms_names').html(selected_organisms_names);
     },
   });
 
-  $('input.organism_input').typeahead({
-    onSelect: function(item) {
-      $("#example-table").tabulator("setFilter", "name", item["text"]);
-      console.log(item["text"]);
-    },
-    ajax: {
-      url: '/organism_names',
-      triggerLength: 1,
-    }
-  });
+  // $('input.gene_input').typeahead({
+  //   ajax: {
+  //     url: '/gene_names',
+  //     triggerLength: 1,
+  //   },
+  // });
+
+  // $('input.organism_input').typeahead({
+  //   onSelect: function(item) {
+  //     $("#example-table").tabulator("setFilter", "name", item["text"]);
+  //     console.log(item["text"]);
+  //   },
+  //   ajax: {
+  //     url: '/organism_names',
+  //     triggerLength: 1,
+  //   }
+  // });
 
 
 });
