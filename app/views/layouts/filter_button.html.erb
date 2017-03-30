@@ -1,0 +1,24 @@
+<div class="dropdown">
+  <button type="button" class="btn btn-success">+</button>
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="col_name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select colomn for filter
+  </button>
+  <div class="dropdown-menu" aria-labelledby="col_name">
+    <button class="dropdown-item filter_column_name" onclick="column_filter('name',this)" type="button"> Name </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('tax',this)" type="button"> Tax </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('common_name',this)" type="button"> Common name </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('version',this)"  type="button"> Annotation version </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('date',this)"  type="button"> Annotation date </button> 
+    <button class="dropdown-item filter_column_name" onclick="column_filter('gene_count',this)"  type="button"> #Genes </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('iso_count',this)"   type="button"> #Isoforms </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('exon_count',this)" type="button"> #Exons </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('intron_count',this)" type="button"> #Introns </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('intron_with_error',this)" type="button"> #Broken introns </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('phase_0_count',this)" type="button"> #Phase 0 </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('phase_1_count',this)" type="button"> #Phase 1 </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('phase_2_count',this)" type="button"> #Phase 2 </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('phase_0_persent',this)" type="button"> %Phase 0 </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('phase_1_persent',this)" type="button"> %Phase 1 </button>
+    <button class="dropdown-item filter_column_name" onclick="column_filter('phase_2_persent',this)" type="button"> %Phase 2 </button>
+  </div>
+</div>

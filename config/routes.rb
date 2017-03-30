@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get  '/organisms', to: 'static_pages#organisms'
   get  '/loads/new', to: 'loads#new'
 
-  get  '/gene_names', to: 'api#gene_names'
-  get  '/organism_names', to: 'api#organism_names'
+  # get '/sql_rules', to: 'api#sql_rules'
+  # get  '/filter_button', to: 'api#filter_button'
+  # get  '/gene_names', to: 'api#gene_names'
+  # get  '/organism_names', to: 'api#organism_names'
   resources :loads
 end

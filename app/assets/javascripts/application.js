@@ -18,6 +18,9 @@
 //= require bootstrap
 //= require turbolinks
 //= require tabulator
+//= require jquery.extendext
+//= require doT
+//= require query-builder
 //= require_tree .
 
 
