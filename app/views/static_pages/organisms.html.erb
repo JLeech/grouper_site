@@ -4,12 +4,19 @@
 
     <div id="inner_center">
 
-        <ul class="nav nav-tabs tabs-panel" role="tablist">
+      <%= render "table_headers" %>
+      <%= render "organism_table_filter" %>
+      <div class="ex_table" id="example-table" ></div>
+    </div>
+</div>
+
+
+<!--         <ul class="nav nav-tabs tabs-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#organism_settings" role="tab">Organisms table settings</a>
+            <a class="nav-link" data-toggle="tab" href="#organism_settings" role="tab">Organisms table settings</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#organisms" role="tab">Organisms table</a>
+            <a class="nav-link  active" data-toggle="tab" href="#organisms" role="tab">Organisms table</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#genes" role="tab">Genes</a>
@@ -21,7 +28,7 @@
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane active" id="organism_settings" role="tabpanel">
+            <div class="tab-pane" id="organism_settings" role="tabpanel">
               <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card">
                   <div class="card-header" role="tab" id="show_headers">
@@ -55,7 +62,7 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane" id="organisms" role="tabpanel">
+            <div class="tab-pane active " id="organisms" role="tabpanel">
               <div class="ex_table" id="example-table" ></div>
               <div class="btn-group column_headers" data-toggle="buttons">
                 <button id="load_button" data-toggle="tooltip" data-placement="top" title="Download table as CSV" type="button" class="btn btn-secondary">Download table</button>
@@ -68,4 +75,4 @@
             </div>
         </div>
     </div>
-<div>
+<div> -->

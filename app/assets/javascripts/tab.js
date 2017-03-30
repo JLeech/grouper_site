@@ -117,8 +117,8 @@ $(document).on("turbolinks:load", function() {
         { title: "%Phase 2", field: "phase_2_persent", sorter: "number", align: "right"},
     ],
     data: tabledata,
-    movableRows: true,
-    movableCols: true,
+    // movableRows: true,
+    // movableCols: true,
     height:"700px",
     selectable:true,
   });
