@@ -312,11 +312,10 @@ $(document).on("turbolinks:load", function() {
       str = "tabledata.filter(function (el) { return " + fixed_rules + "});".replace(new RegExp("\"",'g'),"");
       str = str.replace(new RegExp("\"",'g'),"").replace(new RegExp(" = ",'g')," == ");
       new_data =  eval(str);
-      $("#example-table").tabulator("setData", new_data);      
     }else{
-      $("#example-table").tabulator("setData", tabledata); 
+      new_data = tabledata; 
     }
-
+    $("#example-table").tabulator("setData", new_data);
   });
 
   $('#btn-set').on('click', function() {
@@ -331,14 +330,12 @@ $(document).on("turbolinks:load", function() {
     }
   });
 
-
   $('#btn_set_rules').on('click', function() {
     var rules = $("#set_rules").val();
     if(rules.length > 2){
       setmodal.style.display = "none";
       $('#builder').queryBuilder('setRules', JSON.parse(rules));
     }
-
   });
   
 
@@ -348,7 +345,6 @@ $(document).on("turbolinks:load", function() {
       };
       if (event.target == setmodal) {
           setmodal.style.display = "none";
-
       }
   }
 });

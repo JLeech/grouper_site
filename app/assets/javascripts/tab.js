@@ -91,13 +91,13 @@ var tabledata = [
   {id: 103, name: "Ziziphus jujuba", common_name: "Fruit bearing tree", tax:"Land Plants", version:"100", date:"2016-03-24", gene_count:"33324", iso_count:"37526", exon_count:"205354", intron_count:"163407", intron_with_error:"4517", phase_0_count:"91219", phase_1_count:"36363", phase_2_count:"35825", phase_0_persent:"55.8", phase_1_persent:"22.3", phase_2_persent:"21.9"}
 ];
 
-var new_data = []
+var new_data = tabledata;
 var selected_organisms_ids = [];
 var selected_organisms_names = [];
 
 $(document).on("turbolinks:load", function() {
   $("#example-table").tabulator({
-    fitColumns:true, //fit columns to width of table (optional)
+    fitColumns:true,
     columns:[ //Define Table Colum
         { title: "Name", field: "name", sorter: "string", align: "left", frozen:"true"},
         { title: "Tax", field: "tax", sorter: "string", align: "left"},
@@ -116,7 +116,7 @@ $(document).on("turbolinks:load", function() {
         { title: "%Phase 1", field: "phase_1_persent", sorter: "number", align: "right"},
         { title: "%Phase 2", field: "phase_2_persent", sorter: "number", align: "right"},
     ],
-    data: tabledata,
+    data: new_data,
     // movableRows: true,
     // movableCols: true,
     height:"700px",
@@ -138,6 +138,33 @@ $(document).on("turbolinks:load", function() {
       $('#selected_organisms_names').html(selected_organisms_names);
     },
   });
+
+  $("#btn-select").on('click',function (e){
+    var btn_primary = "btn-primary";
+    var btn_warning = "btn-warning";
+    if(this.classList.contains(btn_primary)){
+      this.innerHTML = "Deselect all rows";
+      this.classList.remove(btn_primary);
+      this.classList.add(btn_warning);
+      $("#example-table").tabulator("selectRow");
+    }else{
+      this.innerHTML = "Select all rows";
+      this.classList.remove(btn_warning);
+      this.classList.add(btn_primary);
+      $("#example-table").tabulator("deselectRow");
+    }
+  });
+
+});
+
+function column_hide(field_name, button) {
+  if (button.classList.contains("active")){
+    $("#example-table").tabulator("showCol", field_name);  
+  }else{
+    $("#example-table").tabulator("hideCol", field_name);  
+  };
+}
+
   // $('input.gene_input').typeahead({
   //   ajax: {
   //     url: '/gene_names',
@@ -155,17 +182,6 @@ $(document).on("turbolinks:load", function() {
   //     triggerLength: 1,
   //   }
   // });
-
-
-});
-
-function column_hide(field_name, button) {
-  if (button.classList.contains("active")){
-    $("#example-table").tabulator("showCol", field_name);  
-  }else{
-    $("#example-table").tabulator("hideCol", field_name);  
-  };
-}
 
 // function column_filter(column_name, button){
 //   $("#col_name")[0].innerHTML = button.innerHTML;
