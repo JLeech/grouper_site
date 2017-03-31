@@ -6,8 +6,41 @@
 
       <%= render "table_headers" %>
       <%= render "organism_table_filter" %>
+
       <div class="ex_table" id="example-table" ></div>
     </div>
+</div>
+
+<div id="getModal" class="modal">
+
+  <div class="modal-content">
+    <div class="modal-header">
+<!--       <span class="close">&times;</span> -->
+      <h2>Paste this rules to "Set rules" box</h2>
+    </div>
+    <div class="modal-body">
+      <textarea id="get_rules" class="rules"></textarea>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="setModal" class="modal">
+
+  <div class="modal-content">
+    <div class="modal-header">
+<!--       <span class="close">&times;</span> -->
+      <h2>Insert rules from "Get rules" box</h2>
+    </div>
+    <div class="modal-body">
+      <textarea id="set_rules" class="rules"></textarea>
+      <button id="btn_set_rules" class="btn btn-success" data-target="basic">Set</button>
+    </div>
+
+  </div>
+
 </div>
 
 <!--         <ul class="nav nav-tabs tabs-panel" role="tablist">
