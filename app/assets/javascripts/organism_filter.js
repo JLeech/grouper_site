@@ -308,19 +308,42 @@ $(document).on("turbolinks:load", function() {
   $('#btn-apply').on('click', function() {
     var rules = JSON.stringify($('#builder').queryBuilder('getSQL')["sql"], null, 2);
     if(rules.length != 2){
-      fixed_rules = rules.replace(new RegExp("AND",'g'),"&&").replace(new RegExp("OR",'g'),"||").replace(/((\w*)\s(=|<|>))/g,replacer);
+      fixed_rules = rules.replace(new RegExp("AND",'g'),"&&").replace(new RegExp("OR",'g'),"||").replace(/((\w*)\s(=|<|>|!=))/g,replacer);
       str = "tabledata.filter(function (el) { return " + fixed_rules + "});".replace(new RegExp("\"",'g'),"");
       str = str.replace(new RegExp("\"",'g'),"").replace(new RegExp(" = ",'g')," == ");
+      console.log(str);
       new_data =  eval(str);
     }else{
-      new_data = tabledata; 
+      new_data = tabledata;
     }
     $("#example-table").tabulator("setData", new_data);
   });
 
   $('#btn-set').on('click', function() {
     setmodal.style.display = "block";
-  }); 
+  });
+
+  $('#btn_set_rules').on('click', function() {
+    var rules = $("#set_rules").val();
+    if(rules.length > 2){
+      setmodal.style.display = "none";
+      $('#builder').queryBuilder('setRules', JSON.parse(rules));
+    }
+  });
+
+  $('#btn_set_rules_from_file').on('change', function(e) {
+    var f = e.target.files[0];
+    if (f){
+      var reader = new FileReader();
+      reader.onload = function(fi){
+        var rules = fi.target.result;
+        setmodal.style.display = "none";
+        $('#builder').queryBuilder('setRules', JSON.parse(rules));
+      };
+      reader.readAsText(f);
+    };
+  });
+
 
   $('#btn-get').on('click', function() {
     var rules = $('#builder').queryBuilder('getRules');
@@ -329,12 +352,12 @@ $(document).on("turbolinks:load", function() {
       getmodal.style.display = "block";
     }
   });
-
-  $('#btn_set_rules').on('click', function() {
-    var rules = $("#set_rules").val();
-    if(rules.length > 2){
-      setmodal.style.display = "none";
-      $('#builder').queryBuilder('setRules', JSON.parse(rules));
+  
+  $('#btn_get_as_file').on('click', function() {
+    var rules = $('#builder').queryBuilder('getRules');
+    if (!$.isEmptyObject(rules)) {
+      var blob = new Blob([JSON.stringify(rules, null, 2)], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, "request.req");
     }
   });
   

@@ -20,6 +20,7 @@
     </div>
     <div class="modal-body">
       <textarea id="get_rules" class="rules"></textarea>
+      <button id="btn_get_as_file" class="btn btn-success" data-target="basic">Get as file</button>
     </div>
 
   </div>
@@ -36,9 +37,11 @@
     </div>
     <div class="modal-body">
       <textarea id="set_rules" class="rules"></textarea>
-      <button id="btn_set_rules" class="btn btn-success" data-target="basic">Set</button>
+        <div class="btn-group">
+        <button id="btn_set_rules" class="btn btn-success" data-target="basic">Set</button>
+        <input type="file" id="btn_set_rules_from_file" class="btn btn-warning" />
+        </div>
     </div>
-
   </div>
 
 </div>

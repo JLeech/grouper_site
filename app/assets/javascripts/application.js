@@ -21,6 +21,7 @@
 //= require jquery.extendext
 //= require doT
 //= require query-builder
+//= require file_saver
 //= require_tree .
 
 
