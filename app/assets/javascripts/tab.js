@@ -99,7 +99,7 @@ $(document).on("turbolinks:load", function() {
   $("#example-table").tabulator({
     fitColumns:true,
     columns:[ //Define Table Colum
-        { title: "Name", field: "name", sorter: "string", align: "left", frozen:"true"},
+        { title: "Name", field: "name", sorter: "string", align: "left"},
         { title: "Tax", field: "tax", sorter: "string", align: "left"},
         { title: "Common name", field: "common_name", sorter: "string", align: "left"},
         { title: "Annotation version", field: "version", sorter: "number", align: "center"},
@@ -128,7 +128,8 @@ $(document).on("turbolinks:load", function() {
   });
 
   $('#clear_filter').on('click', function (e) {
-    $("#example-table").tabulator("clearFilter");
+    new_data = tabledata;
+    $("#example-table").tabulator("setData", new_data);
   });
 
   $("#example-table").tabulator({
@@ -152,6 +153,18 @@ $(document).on("turbolinks:load", function() {
       this.classList.remove(btn_warning);
       this.classList.add(btn_primary);
       $("#example-table").tabulator("deselectRow");
+    }
+  });
+
+  $("a.nav-link").on('click',function(e){
+    if(this.href.split("#")[1] == "organisms"){
+      $("div#example-table")[0].style.display = "block";
+      var cols = $("div.tabulator-col");
+      for(var i = 0; i < cols.length; i++){
+        cols[i].style.height = "24.25px";
+      }
+    }else{
+      $("div#example-table")[0].style.display = "none";
     }
   });
 

@@ -303,8 +303,6 @@ $(document).on("turbolinks:load", function() {
   var getmodal = document.getElementById('getModal');
   var setmodal = document.getElementById('setModal');
 
-  
-
   $('#btn-apply').on('click', function() {
     var rules = JSON.stringify($('#builder').queryBuilder('getSQL')["sql"], null, 2);
     if(rules.length != 2){
@@ -343,7 +341,6 @@ $(document).on("turbolinks:load", function() {
       reader.readAsText(f);
     };
   });
-
 
   $('#btn-get').on('click', function() {
     var rules = $('#builder').queryBuilder('getRules');

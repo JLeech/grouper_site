@@ -4,57 +4,21 @@
 
     <div id="inner_center">
 
-      <%= render "table_headers" %>
+<!--       <%= render "table_headers" %>
       <%= render "organism_table_filter" %>
 
       <div class="ex_table" id="example-table" ></div>
     </div>
-</div>
-
-<div id="getModal" class="modal">
-
-  <div class="modal-content">
-    <div class="modal-header">
-<!--       <span class="close">&times;</span> -->
-      <h2>Paste this rules to "Set rules" box</h2>
-    </div>
-    <div class="modal-body">
-      <textarea id="get_rules" class="rules"></textarea>
-      <button id="btn_get_as_file" class="btn btn-success" data-target="basic">Get as file</button>
-    </div>
-
-  </div>
-
-</div>
-
-
-<div id="setModal" class="modal">
-
-  <div class="modal-content">
-    <div class="modal-header">
-<!--       <span class="close">&times;</span> -->
-      <h2>Insert rules from "Get rules" box</h2>
-    </div>
-    <div class="modal-body">
-      <textarea id="set_rules" class="rules"></textarea>
-        <div class="btn-group">
-        <button id="btn_set_rules" class="btn btn-success" data-target="basic">Set</button>
-        <input type="file" id="btn_set_rules_from_file" class="btn btn-warning" />
-        </div>
-    </div>
-  </div>
-
-</div>
-
-<!--         <ul class="nav nav-tabs tabs-panel" role="tablist">
+</div> -->
+        <ul class="nav nav-tabs tabs-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#organism_settings" role="tab">Organisms table settings</a>
+            <a class="nav-link active" data-toggle="tab" href="#organism_settings" role="tab">Step 1. Customise organism table </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active" data-toggle="tab" href="#organisms" role="tab">Organisms table</a>
+            <a class="nav-link" data-toggle="tab" href="#organisms" role="tab">Step 2. Select organisms</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#genes" role="tab">Genes</a>
+            <a class="nav-link" data-toggle="tab" href="#genes" role="tab">Step 3. Customise genes table</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#other" role="tab">Other</a>
@@ -63,7 +27,7 @@
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane" id="organism_settings" role="tabpanel">
+            <div class="tab-pane active " id="organism_settings" role="tabpanel">
               <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card">
                   <div class="card-header" role="tab" id="show_headers">
@@ -97,17 +61,49 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane active " id="organisms" role="tabpanel">
-              <div class="ex_table" id="example-table" ></div>
-              <div class="btn-group column_headers" data-toggle="buttons">
+            <div class="tab-pane" id="organisms" role="tabpanel">
+              <div class="column_headers" >
                 <button id="load_button" data-toggle="tooltip" data-placement="top" title="Download table as CSV" type="button" class="btn btn-secondary">Download table</button>
                 <button id="clear_filter" data-toggle="tooltip" data-placement="top" title="Clear all table filters" type="button" class="btn btn-secondary">Clear filters</button>
               </div>
             </div>
-
             <div class="tab-pane" id="genes" role="tabpanel">
               <div id="selected_organisms_names"></div>
             </div>
         </div>
+        <div class="ex_table" id="example-table" ></div>
     </div>
-<div> -->
+<div>
+
+<div id="getModal" class="modal">
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Paste this rules to "Set rules" box</h2>
+    </div>
+    <div class="modal-body">
+      <textarea id="get_rules" class="rules"></textarea>
+      <button id="btn_get_as_file" class="btn btn-success" data-target="basic">Get as file</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="setModal" class="modal">
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Insert rules from "Get rules" box</h2>
+    </div>
+    <div class="modal-body">
+      <textarea id="set_rules" class="rules"></textarea>
+        <div class="btn-group">
+        <button id="btn_set_rules" class="btn btn-success" data-target="basic">Set</button>
+        <input type="file" id="btn_set_rules_from_file" class="btn btn-warning" />
+        </div>
+    </div>
+  </div>
+
+</div>

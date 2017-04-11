@@ -13,9 +13,16 @@ html {
   font-size: 15px;
 }
 
-
-.active {
+.header_butt.active {
   background-color: #a3a3a3 !important;
+}
+
+label.btn-xs {
+  background-color: #a3a3a3 !important;
+}
+
+label.btn-xs.active {
+  background-color: #449d44 !important;
 }
 
 div#meta_text{
@@ -75,6 +82,7 @@ div.ex_table{
   font-size: 10px;
   margin-top: 50px;
   width: 1200px;
+  display: none;
 }
 
 button.header_butt{
