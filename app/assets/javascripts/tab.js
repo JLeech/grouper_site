@@ -123,6 +123,15 @@ $(document).on("turbolinks:load", function() {
     selectable:true,
   });
 
+
+  var org_table_headers = $(".tabulator-col-title");
+
+  for (var i = 0; i < org_table_headers.length; ++i) {
+    org_table_headers[i].setAttribute("data-toggle","tooltip");
+    org_table_headers[i].setAttribute("data-placement","top");
+    org_table_headers[i].setAttribute("title",org_table_headers[i].innerHTML);
+  }
+
   $('#load_button').on('click', function (e) {
     $("#example-table").tabulator("download", "csv", "organisms_table.csv");
   });
@@ -157,7 +166,7 @@ $(document).on("turbolinks:load", function() {
   });
 
   $("a.nav-link").on('click',function(e){
-    if(this.href.split("#")[1] == "organisms"){
+    if(this.href.split("#")[1] == "organism_settings"){
       $("div#example-table")[0].style.display = "block";
       var cols = $("div.tabulator-col");
       for(var i = 0; i < cols.length; i++){

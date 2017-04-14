@@ -315,6 +315,7 @@ $(document).on("turbolinks:load", function() {
       new_data = tabledata;
     }
     $("#example-table").tabulator("setData", new_data);
+
   });
 
   $('#btn-set').on('click', function() {
@@ -357,7 +358,6 @@ $(document).on("turbolinks:load", function() {
       saveAs(blob, "request.req");
     }
   });
-  
 
   window.onclick = function(event) {
       if (event.target == getmodal) {
