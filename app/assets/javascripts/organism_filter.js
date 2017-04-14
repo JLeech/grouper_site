@@ -319,7 +319,9 @@ $(document).on("turbolinks:load", function() {
   });
 
   $('#btn-set').on('click', function() {
+    $('#btn_set_rules_from_file').value = null
     setmodal.style.display = "block";
+
   });
 
   $('#btn_set_rules').on('click', function() {
