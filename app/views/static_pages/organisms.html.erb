@@ -1,22 +1,18 @@
-<%= render "header" %>
+    <button id="btn-set" class="btn btn-success" data-target="basic">Set query</button>
+    <button id="btn-get" class="btn btn-primary" data-target="basic">Get query</button>
+    <button id="btn-reset" class="btn btn-warning" data-target="basic">Reset query</button>
+
+<div id="gene-filter" class="query-builder form-inline"> </div>
+
+<!-- <%= render "header" %>
 
 <div id="outer_center">
 
     <div id="inner_center">
-
-<!--       <%= render "table_headers" %>
-      <%= render "organism_table_filter" %>
-
-      <div class="ex_table" id="example-table" ></div>
-    </div>
-</div> -->
         <ul class="nav nav-tabs tabs-panel" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#organism_settings" role="tab">Step 1. Select organisms </a>
           </li>
-<!--           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#organisms" role="tab">Step 2. Select organisms</a>
-          </li> -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#genes" role="tab">Step 2. Select genes</a>
           </li>
@@ -63,12 +59,9 @@
               <button id="load_button" data-toggle="tooltip" data-placement="top" title="Download table as CSV" type="button" class="btn btn-secondary">Download table</button>
               <button id="btn-select" class="btn btn-primary" data-target="basic">Select all rows</button>
             </div>
-<!--             <div class="tab-pane" id="organisms" role="tabpanel">
-              <div class="column_headers" >
-              </div>
-            </div> -->
             <div class="tab-pane" id="genes" role="tabpanel">
               <div id="selected_organisms_names"></div>
+              <%= render "gene_selection_tab" %>
             </div>
         </div>
         <div class="ex_table" id="example-table" ></div>
@@ -106,4 +99,4 @@
     </div>
   </div>
 
-</div>
+</div> -->
