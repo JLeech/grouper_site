@@ -314,7 +314,7 @@ $(document).on("turbolinks:load", function() {
     }else{
       new_data = tabledata;
     }
-    $("#example-table").tabulator("setData", new_data);
+    $("#organism_table").tabulator("setData", new_data);
 
   });
 

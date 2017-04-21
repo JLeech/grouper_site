@@ -96,7 +96,7 @@ var selected_organisms_ids = [];
 var selected_organisms_names = [];
 
 $(document).on("turbolinks:load", function() {
-  $("#example-table").tabulator({
+  $("#organism_table").tabulator({
     fitColumns:true,
     columns:[ //Define Table Colum
         { title: "Name", field: "name", sorter: "string", align: "left"},
@@ -133,18 +133,18 @@ $(document).on("turbolinks:load", function() {
   }
 
   $('#load_button').on('click', function (e) {
-    $("#example-table").tabulator("download", "csv", "organisms_table.csv");
+    $("#organism_table").tabulator("download", "csv", "organisms_table.csv");
   });
 
   $('#clear_filter').on('click', function (e) {
     new_data = tabledata;
-    $("#example-table").tabulator("setData", new_data);
+    $("#organism_table").tabulator("setData", new_data);
   });
 
-  $("#example-table").tabulator({
+  $("#organism_table").tabulator({
     rowSelectionChanged:function(data, rows){
       selected_organisms_ids = Array.prototype.map.call(data, function(x) { return x.id; });
-      selected_organisms_names = Array.prototype.map.call(data, function(x) { return x.name; });
+      selected_organisms_names = Array.prototype.map.call(data, function(x) { return x.name + " "; });
       $('#selected_organisms_names').html(selected_organisms_names);
     },
   });
@@ -156,34 +156,34 @@ $(document).on("turbolinks:load", function() {
       this.innerHTML = "Deselect all rows";
       this.classList.remove(btn_primary);
       this.classList.add(btn_warning);
-      $("#example-table").tabulator("selectRow");
+      $("#organism_table").tabulator("selectRow");
     }else{
       this.innerHTML = "Select all rows";
       this.classList.remove(btn_warning);
       this.classList.add(btn_primary);
-      $("#example-table").tabulator("deselectRow");
+      $("#organism_table").tabulator("deselectRow");
     }
   });
 
   $("a.nav-link").on('click',function(e){
     if(this.href.split("#")[1] == "organism_settings"){
-      $("div#example-table")[0].style.display = "block";
+      $("div#organism_table")[0].style.display = "block";
       var cols = $("div.tabulator-col");
       for(var i = 0; i < cols.length; i++){
         cols[i].style.height = "24.25px";
       }
     }else{
-      $("div#example-table")[0].style.display = "none";
+      $("div#organism_table")[0].style.display = "none";
     }
   });
 
 });
 
-function column_hide(field_name, button) {
+function column_hide(field_name, button, table) {
   if (button.classList.contains("active")){
-    $("#example-table").tabulator("showCol", field_name);  
+    $(table).tabulator("showCol", field_name);  
   }else{
-    $("#example-table").tabulator("hideCol", field_name);  
+    $(table).tabulator("hideCol", field_name);  
   };
 }
 
@@ -196,7 +196,7 @@ function column_hide(field_name, button) {
 
   // $('input.organism_input').typeahead({
   //   onSelect: function(item) {
-  //     $("#example-table").tabulator("setFilter", "name", item["text"]);
+  //     $("#organism_table").tabulator("setFilter", "name", item["text"]);
   //     console.log(item["text"]);
   //   },
   //   ajax: {
