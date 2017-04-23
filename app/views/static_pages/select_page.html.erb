@@ -1,6 +1,34 @@
 
 <%= render "header" %>
 <%= render "static_pages/genes/gene_table_filters" %>
+
+<div id="gene-query-get-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Paste this query to "Set query" box</h2>
+    </div>
+    <div class="modal-body">
+      <textarea id="gene-query-get-text" class="rules"></textarea>
+      <button id="btn-gene-query-get-as-file" class="btn btn-success" data-target="basic">Get as file</button>
+    </div>
+  </div>
+</div>
+
+<div id="gene-query-set-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Insert query from "Get query" box</h2>
+    </div>
+    <div class="modal-body">
+      <textarea id="gene-query-set-text" class="rules"></textarea>
+        <div class="btn-group">
+        <button id="btn-gene-query-set" class="btn btn-success" data-target="basic">Set</button>
+        <input type="file" id="btn-gene-query-set-from-file" class="btn btn-warning" />
+        </div>
+    </div>
+  </div>
+</div>
+
 <!-- <div id="outer_center">
 
     <div id="inner_center">
@@ -57,3 +85,4 @@
   </div>
 
 </div> -->
+

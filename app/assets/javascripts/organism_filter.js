@@ -303,6 +303,7 @@ $(document).on("turbolinks:load", function() {
   var getmodal = document.getElementById('getModal');
   var setmodal = document.getElementById('setModal');
 
+
   $('#btn-apply').on('click', function() {
     var rules = JSON.stringify($('#builder').queryBuilder('getSQL')["sql"], null, 2);
     if(rules.length != 2){
@@ -321,7 +322,6 @@ $(document).on("turbolinks:load", function() {
   $('#btn-set').on('click', function() {
     $('#btn_set_rules_from_file').value = null
     setmodal.style.display = "block";
-
   });
 
   $('#btn_set_rules').on('click', function() {
@@ -357,17 +357,24 @@ $(document).on("turbolinks:load", function() {
     var rules = $('#builder').queryBuilder('getRules');
     if (!$.isEmptyObject(rules)) {
       var blob = new Blob([JSON.stringify(rules, null, 2)], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, "request.req");
+      saveAs(blob, "org_query.req");
     }
   });
 
   window.onclick = function(event) {
+
       if (event.target == getmodal) {
           getmodal.style.display = "none";
       };
       if (event.target == setmodal) {
           setmodal.style.display = "none";
-      }
+      };
+      if (event.target == gene_get_modal) {
+          gene_get_modal.style.display = "none";
+      };
+      if (event.target == gene_set_modal) {
+          gene_set_modal.style.display = "none";
+      }   
   }
 });
 
