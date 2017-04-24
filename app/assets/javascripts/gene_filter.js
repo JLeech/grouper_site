@@ -52,7 +52,7 @@ $(document).on("turbolinks:load", function() {
 
   var gene_get_modal = document.getElementById('gene-query-get-modal');
   var gene_set_modal = document.getElementById('gene-query-set-modal');
-  console.log(gene_get_modal);
+
 
   $('#gene-btn-set').on('click', function() {
     $('#btn-gene-query-set-from-file').value = null
@@ -95,15 +95,6 @@ $(document).on("turbolinks:load", function() {
       saveAs(blob, "gene_query.req");
     }
   });
-
-  window.onclick = function(event) {
-      if (event.target == gene_get_modal) {
-          gene_get_modal.style.display = "none";
-      };
-      if (event.target == gene_set_modal) {
-          gene_set_modal.style.display = "none";
-      };
-  };
 
 });
 

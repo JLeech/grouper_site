@@ -164,19 +164,6 @@ $(document).on("turbolinks:load", function() {
       $("#organism_table").tabulator("deselectRow");
     }
   });
-
-  $("a.nav-link").on('click',function(e){
-    if(this.href.split("#")[1] == "organism_settings"){
-      $("div#organism_table")[0].style.display = "block";
-      var cols = $("div.tabulator-col");
-      for(var i = 0; i < cols.length; i++){
-        cols[i].style.height = "24.25px";
-      }
-    }else{
-      $("div#organism_table")[0].style.display = "none";
-    }
-  });
-
 });
 
 function column_hide(field_name, button, table) {
