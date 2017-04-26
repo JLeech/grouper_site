@@ -26,4 +26,5 @@ $(document).on("turbolinks:load", function() {
     height:"700px",
     selectable:true,
   });
+
 });

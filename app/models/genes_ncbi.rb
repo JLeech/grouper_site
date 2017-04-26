@@ -1,0 +1,3 @@
+class GenesNcbi < ApplicationRecord
+
+end

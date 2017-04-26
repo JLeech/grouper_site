@@ -8,7 +8,7 @@ $(document).on("turbolinks:load", function() {
       type: 'string',
       operators: ['equal', 'not_equal'],
       input: function(rule, name) {
-        return '<input class="form-control gene_name" name ='+name+' type="text"> </input>';
+        return '<input class="form-control gene_name" name ="'+name+'" placeholder="Search" autocomplete="off" type="search"> </input>';
       }},{
         id: 'id_orthologous_groups',
         label: 'Ortho group',
@@ -22,7 +22,7 @@ $(document).on("turbolinks:load", function() {
         type: 'string',
         operators: ['equal', 'not_equal'],
         input: function(rule, name) {
-          return '<input class="form-control gene_ncbi_id" name ='+name+' type="text"> </input>';
+          return '<input class="form-control gene_ncbi_id" name ='+name+' placeholder="Search" autocomplete="off" type="search"> </input>';
       }},{
         id: 'prot_but_not_rna',
         label: 'Protein but not RNA',
@@ -45,6 +45,25 @@ $(document).on("turbolinks:load", function() {
         operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal']
 			}]
   });
+  $('#gene-filter').on('afterUpdateRuleFilter.queryBuilder', function(e, level){
+    $('input.gene_name').typeahead({
+      ajax:{
+        url: "/gene_names",
+        triggerLength: 1,
+        method: "get",
+      }
+    }); 
+
+    $('input.gene_ncbi_id').typeahead({
+      ajax:{
+        url: "/gene_ncbis",
+        triggerLength: 1,
+        method: "get",
+      }
+    });
+  });
+
+
 
   $('#gene-btn-reset').on('click', function() {
     $('#gene-filter').queryBuilder('reset');
@@ -96,7 +115,74 @@ $(document).on("turbolinks:load", function() {
     }
   });
 
+  $('input.gene_name').typeahead({
+    ajax:{
+      url: "/gene_names",
+      triggerLength: 1,
+      method: "get",
+    }
+  }); 
+
+  // $.typeahead({
+  //   input: 'input.gene_name',
+  //   minLength: 1,
+  //   dynamic: true,
+  //   source:{
+  //     ajax: function(query){
+  //       return {
+  //         type: "GET",
+  //         contentType: "application/json",
+  //         triggerLength: 1,
+  //         url: '/gene_names',
+  //         data: {query: "{{query}}"},
+  //         path: "data",
+  //       }
+  //     },
+  //     template: '<span >{{name}}</span>'
+  //   },
+  // });
+
+  // $.typeahead({
+  //   input: '.gene_name',
+  //   minLength: 1,
+  //   maxItem: 20,
+  //   source:{
+  //     ajax:{
+  //       type: "get",
+  //       url: "/gene_names",
+  //       data:{query: "d" }
+  //     }
+  //   }
+  // });
+  // $('input.gene_name').typeahead({
+  //     source: function(query, process) {
+  //         return $.ajax({
+  //             url: '/gene_names',
+  //             type: 'get',
+  //             data: {query: query},
+  //             contentType: "application/json",
+  //             dataType: 'json',
+  //             triggerLength: 1,
+  //             success: function(json) {
+  //                 return typeof json.options == 'undefined' ? false : process(json.options);
+  //             }
+  //         });
+  //     }
+  // });
+
+  // $('input.gene_name').typeahead({
+  //   minLength: 1,
+  //   source{
+  //     ajax: {
+  //       type: "GET",
+  //       contentType: "application/json",
+  //       url: '/gene_names',
+  //       triggerLength: 1,
+  //     },     
+  //   },
+  // });
 });
+
 
 // FIX BUG WITH SAME NAME FILE
 
@@ -105,3 +191,19 @@ $(document).on("turbolinks:load", function() {
 // gene-btn-get
 // gene-btn-reset
 // gene-clear-filter
+
+    // $.ajax({
+    //   contentType: "application/json",
+    //   url: '/sql_rules',
+    //   data: {'status': JSON.stringify(rules, null, 2) },
+    //   triggerLength: 1,
+    // }).done(function(data) {
+    //    console.log(data)
+    // });;
+
+    // ajax: {
+    //   contentType: "application/json",
+    //   url: '/gene_names',
+    //   data: {'org_ids': 10},
+    //   triggerLength: 1,
+    // },

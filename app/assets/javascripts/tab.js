@@ -164,6 +164,8 @@ $(document).on("turbolinks:load", function() {
       $("#organism_table").tabulator("deselectRow");
     }
   });
+
+
 });
 
 function column_hide(field_name, button, table) {
