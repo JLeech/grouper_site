@@ -33,14 +33,16 @@ $(document).on("turbolinks:load", function() {
           0: 'No'
         },
         operators: ['equal'],
-      },{
-        id: 'isoform_count',
-        label: '#Isoforms' ,
-        type: 'integer',
-        operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal']
-      },{
-        id: 'max_isoform_count',
-        label: 'Max #isoforms' ,
+      },
+      // },{
+      //   id: 'isoform_count',
+      //   label: '#Isoforms' ,
+      //   type: 'integer',
+      //   operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal']
+      // },
+      {
+        id: 'max_introns_count',
+        label: 'Max #introns' ,
         type: 'integer',
         operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal']
 			}]
@@ -113,6 +115,18 @@ $(document).on("turbolinks:load", function() {
       var blob = new Blob([JSON.stringify(rules, null, 2)], {type: "text/plain;charset=utf-8"});
       saveAs(blob, "gene_query.req");
     }
+  });
+
+  $('#gene-btn-apply').on('click', function(){
+    var rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
+    $.ajax({
+      contentType: "application/json",
+      url: '/apply_gene_query',
+      data: {request: rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
+      triggerLength: 1,
+    }).done(function(data) {
+      $("#gene_table").tabulator("setData", data);
+    });;
   });
 
   $('input.gene_name').typeahead({
@@ -191,15 +205,6 @@ $(document).on("turbolinks:load", function() {
 // gene-btn-get
 // gene-btn-reset
 // gene-clear-filter
-
-    // $.ajax({
-    //   contentType: "application/json",
-    //   url: '/sql_rules',
-    //   data: {'status': JSON.stringify(rules, null, 2) },
-    //   triggerLength: 1,
-    // }).done(function(data) {
-    //    console.log(data)
-    // });;
 
     // ajax: {
     //   contentType: "application/json",

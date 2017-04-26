@@ -310,7 +310,6 @@ $(document).on("turbolinks:load", function() {
       fixed_rules = rules.replace(new RegExp("AND",'g'),"&&").replace(new RegExp("OR",'g'),"||").replace(/((\w*)\s(=|<|>|!=))/g,replacer);
       str = "tabledata.filter(function (el) { return " + fixed_rules + "});".replace(new RegExp("\"",'g'),"");
       str = str.replace(new RegExp("\"",'g'),"").replace(new RegExp(" = ",'g')," == ");
-      console.log(str);
       new_data =  eval(str);
     }else{
       new_data = tabledata;

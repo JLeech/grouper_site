@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # get  '/filter_button', to: 'api#filter_button'
   get  '/gene_names', to: 'api#gene_names'
   get  '/gene_ncbis', to: 'api#gene_ncbis'
+  get  '/apply_gene_query', to: 'api#apply_gene_query'
   # get  '/organism_names', to: 'api#organism_names'
   resources :loads
 end
