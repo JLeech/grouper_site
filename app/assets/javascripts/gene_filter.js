@@ -48,6 +48,7 @@ $(document).on("turbolinks:load", function() {
 			}]
   });
   $('#gene-filter').on('afterUpdateRuleFilter.queryBuilder', function(e, level){
+    
     $('input.gene_name').typeahead({
       ajax:{
         url: "/gene_names",
@@ -64,8 +65,6 @@ $(document).on("turbolinks:load", function() {
       }
     });
   });
-
-
 
   $('#gene-btn-reset').on('click', function() {
     $('#gene-filter').queryBuilder('reset');
@@ -136,6 +135,10 @@ $(document).on("turbolinks:load", function() {
       method: "get",
     }
   }); 
+
+  $('#gene-load-table-button').on('click', function (e) {
+    $("#gene_table").tabulator("download", "csv", "gene_table(small).csv");
+  });
 
   // $.typeahead({
   //   input: 'input.gene_name',

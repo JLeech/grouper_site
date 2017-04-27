@@ -39,7 +39,6 @@ class ApiController < ApplicationController
     Genes.connection.execute(match_gene_request).to_a.each { |rec| result_table[rec["id_organisms"]]["selected_genes"] = rec["count"]}
     Genes.connection.execute(org_request).to_a.each { |rec| result_table[rec["id_organisms"]]["genes_total"] = rec["count"] }
 
-
     result_table.each do |key, value|
       value["percent_selected_genes"] = (value["selected_genes"].to_f/value["genes_total"].to_f).round(6)
       value["selected_genes"] ||= 0
@@ -47,7 +46,7 @@ class ApiController < ApplicationController
       value["selected_isoforms"] = 0
       value["precent_selected_isoforms"] = 0
       value["total_exons"] = 0
-      value["total_exons"] = 0
+      value["total_introns"] = 0
     end
     result = result_table.map { |k,v| v }
     render json: result.to_json

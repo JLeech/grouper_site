@@ -2,29 +2,30 @@
     Metadata:
 </div>
 <div class="btn-group column_headers" data-toggle="buttons">
-    <button onclick="column_hide('name',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Latin name of the organism" type="button" class="btn btn-success header_butt"> Name </button>
+    <button onclick="column_hide('org_name',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Latin name of the organism" type="button" class="btn btn-success header_butt"> Organism</button>
 </div>
 <div style="text-align:left">
     Genes:
 </div>
 <div class="btn-group column_headers" data-toggle="buttons">
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of genes" type="button" class="btn btn-success header_butt"> #Genes </button>
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected genes" type="button" class="btn btn-success header_butt"> #Selected genes </button>
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Percent of selected genes" type="button" class="btn btn-success header_butt"> %Selected genes </button>
+    <button onclick="column_hide('genes_total',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of genes" type="button" class="btn btn-success header_butt"> Total </button>
+    <button onclick="column_hide('selected_genes',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected genes" type="button" class="btn btn-success header_butt"> #selected </button>
+    <button onclick="column_hide('percent_selected_genes',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Percent of selected genes" type="button" class="btn btn-success header_butt"> %selected </button>
 
 </div>
 <div style="text-align:left">
     Isoforms:
 </div>
 <div class="btn-group column_headers" data-toggle="buttons">
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of isoforms" type="button" class="btn btn-success header_butt"> #Isoforms </button>
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected isoforms" type="button" class="btn btn-success header_butt"> #Selected isoforms </button>
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Percent of selected isoforms" type="button" class="btn btn-success header_butt"> %Selected isoforms </button> 
+    <button onclick="column_hide('isoforms',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of isoforms" type="button" class="btn btn-success header_butt"> Total </button>
+    <button onclick="column_hide('selected_isoforms',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected isoforms" type="button" class="btn btn-success header_butt"> #selected </button>
+    <button onclick="column_hide('precent_selected_isoforms',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Percent of selected isoforms" type="button" class="btn btn-success header_butt"> %selected </button> 
 </div>
 <div style="text-align:left">
     Exons/Intons:
 </div>
 <div class="btn-group column_headers" data-toggle="buttons">
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected exons" type="button" class="btn btn-success header_butt"> #Exons </button>
-    <button onclick="column_hide('gene_count',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected introns" type="button" class="btn btn-success header_butt"> #Introns </button>
+    <button onclick="column_hide('total_exons',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected exons" type="button" class="btn btn-success header_butt"> #Exons </button>
+    <button onclick="column_hide('total_introns',this,'#gene_table')" data-toggle="tooltip" data-placement="top" title="Number of selected introns" type="button" class="btn btn-success header_butt"> #Introns </button>
 </div>
+
