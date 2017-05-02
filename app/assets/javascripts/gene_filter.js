@@ -123,8 +123,16 @@ $(document).on("turbolinks:load", function() {
       url: '/apply_gene_query',
       data: {request: rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
       triggerLength: 1,
+      async: true,
+      beforeSend: function() {
+        $("div#load-block").show();
+      },
+      error: function (err) {
+        $("div#load-block").hide();
+    }
     }).done(function(data) {
       $("#gene_table").tabulator("setData", data);
+      $("div#load-block").hide();
     });;
   });
 
