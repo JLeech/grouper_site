@@ -144,7 +144,7 @@ $(document).on("turbolinks:load", function() {
   $("#organism_table").tabulator({
     rowSelectionChanged:function(data, rows){
       selected_organisms_ids = Array.prototype.map.call(data, function(x) { return x.id; });
-      selected_organisms_names = Array.prototype.map.call(data, function(x) { return x.name + " "; });
+      selected_organisms_names = Array.prototype.map.call(data, function(x) { return x.name + ", "; });
       $('#selected_organisms_names').html(selected_organisms_names);
     },
   });

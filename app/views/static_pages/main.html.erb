@@ -1,9 +1,30 @@
+<%= render "header" %>
 
-<h1 class='main'> statistics and exons grouping </h1>
+<div id="outer_center">
 
-<nav>
-  <ul class='nav'>
-    <li class='nav'> <h1> <%= link_to "about",   about_path, { :class => "menu"} %> </h1> </li>
-    <li class='nav'> <h1> <%= link_to "load",   loads_new_path, { :class => "menu"} %> </h1> </li>
-  </ul>
-</nav>
+    <div id="main_center" style="width: 40%; margin: 0 auto; text-align: justify;" >
+	    <p style="font-size:120%; text-indent: 50px;">
+			We present a new <b> exon-intron structure database (EIS-DB)</b> containing comprehensive
+			data of well-annotated genes in more than 100 eukaryotic genomes from different taxonomic
+			groups (vertebrates, invertebrates, plants, and fungi). It allows one to extract data related to a
+			special gene or isoform of a special organism or obtain statistical data related to the given set of
+			genes and/or organisms. Although the similar databases exist, they are mainly out of date 1 , or
+			taxonomic-or isoform specific 2,3.
+		</p>
+		<p style="font-size:120%; text-indent: 50px;">
+			EIS-DB is a relational database managed by PostgreSQL. Structurally, it contains 15
+			tables. The main ones are ‘Organisms’, ‘Genes’, ‘Isoforms’, ‘Orthologous groups’, ‘Exons’ and
+			‘Introns’. The others contain auxiliary data, e.g., taxonomy; EIS-DB also contains fasta-files
+			with related sequences. The detailed intron section makes EIS-DB especially appealing for
+			studying various intron features in different organisms. It is the preliminary
+			version of EIS DB.
+		</p>
+		<p style="font-size:120%; text-indent: 50px;">
+			As the main source of gene sequences and annotations, 112 RefSeq 4 genome assemblies,
+			(current to March 2017) were used along with additional input data on gene orthology.
+		</p>
+		<p>
+			<h1> <%= link_to 'SHOW ME THE BASE!!!', eis_db_path %> </h1>
+		</p>
+	</div>
+</div>
