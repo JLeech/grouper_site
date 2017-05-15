@@ -27,14 +27,16 @@ class Genes < ApplicationRecord
 		Isoforms.get_all_org(id_org_part).each { |rec| result_table[rec["id_organisms"]]["isoforms"] = rec["count"]}
 
 	    result_table.each do |key, value|
-	      value["percent_selected_genes"] = (value["selected_genes"].to_f/value["genes_total"].to_f).round(6)
+	      value["percent_selected_genes"] = ((value["selected_genes"].to_f/value["genes_total"].to_f)*100).round(2)
 	      value["selected_genes"] ||= 0
 	      value["isoforms"] ||= 0
 	      value["selected_isoforms"] ||= 0
-	      value["precent_selected_isoforms"] = (value["selected_isoforms"].to_f/value["isoforms"].to_f).round(6)
+	      value["precent_selected_isoforms"] = ((value["selected_isoforms"].to_f/value["isoforms"].to_f)*100).round(2)
 	      value["total_exons"] ||= 0
 	      value["total_introns"] ||= 0
 	    end
+	    result_table.delete_if { |key, value| value["selected_genes"] == 0 } 
+
 	    result = result_table.map { |k,v| v }
 	end
 
@@ -55,6 +57,10 @@ class Genes < ApplicationRecord
 	    request = request.gsub("gene_name","name")
 	    request = request.gsub("\"","")
 	    return request		
+	end
+
+	def self.count_detailed_statistics(request)
+		return 
 	end
 
 end

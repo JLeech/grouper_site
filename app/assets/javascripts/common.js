@@ -4,8 +4,24 @@ $(document).on("turbolinks:load", function() {
   var setmodal = document.getElementById('setModal');
   var gene_get_modal = document.getElementById('gene-query-get-modal');
   var gene_set_modal = document.getElementById('gene-query-set-modal');
+  var exon_get_modal = document.getElementById('exon-query-get-modal');
+  var exon_set_modal = document.getElementById('exon-query-set-modal');
+  var intron_get_modal = document.getElementById('intron-query-get-modal');
+  var intron_set_modal = document.getElementById('intron-query-set-modal');
 
   window.onclick = function(event) {
+    if (event.target == intron_get_modal) {
+        intron_get_modal.style.display = "none";
+    };
+    if (event.target == intron_set_modal) {
+        intron_set_modal.style.display = "none";
+    };
+    if (event.target == exon_get_modal) {
+        exon_get_modal.style.display = "none";
+    };
+    if (event.target == exon_set_modal) {
+        exon_set_modal.style.display = "none";
+    };
     if (event.target == gene_get_modal) {
         gene_get_modal.style.display = "none";
     };
