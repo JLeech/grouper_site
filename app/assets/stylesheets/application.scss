@@ -14,6 +14,11 @@ html {
   font-size: 15px;
 }
 
+sup {
+    vertical-align: super;
+    font-size:70%
+}
+
 .header_butt.active {
   background-color: #a3a3a3 !important;
 }

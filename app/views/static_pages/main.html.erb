@@ -2,29 +2,33 @@
 
 <div id="outer_center">
 
-    <div id="main_center" style="width: 40%; margin: 0 auto; text-align: justify;" >
-	    <p style="font-size:120%; text-indent: 50px;">
-			We present a new <b> exon-intron structure database (EIS-DB)</b> containing comprehensive
-			data of well-annotated genes in more than 100 eukaryotic genomes from different taxonomic
-			groups (vertebrates, invertebrates, plants, and fungi). It allows one to extract data related to a
-			special gene or isoform of a special organism or obtain statistical data related to the given set of
-			genes and/or organisms. Although the similar databases exist, they are mainly out of date 1 , or
-			taxonomic-or isoform specific 2,3.
-		</p>
-		<p style="font-size:120%; text-indent: 50px;">
-			EIS-DB is a relational database managed by PostgreSQL. Structurally, it contains 15
-			tables. The main ones are ‘Organisms’, ‘Genes’, ‘Isoforms’, ‘Orthologous groups’, ‘Exons’ and
-			‘Introns’. The others contain auxiliary data, e.g., taxonomy; EIS-DB also contains fasta-files
-			with related sequences. The detailed intron section makes EIS-DB especially appealing for
-			studying various intron features in different organisms. It is the preliminary
-			version of EIS DB.
-		</p>
-		<p style="font-size:120%; text-indent: 50px;">
-			As the main source of gene sequences and annotations, 112 RefSeq 4 genome assemblies,
-			(current to March 2017) were used along with additional input data on gene orthology.
+    <div id="main_center" style="width: 60%; margin: 0 auto; text-align: justify; font-size:120%; text-indent: 50px;" >
+		<p>
+			Analysis of exon-intron structures of eukaryotic genes is essential for many biological fields such as evolutionary genomics, gene engineering, molecular biology, etc. Unfortunately, it is complicated by imperfectness of sequencing data and, thereby, gene annotation problems. To handle this, several separate curated databases about genes and its elements in different organisms had been developed (e.g., <a href="https://academic.oup.com/bib/article/7/2/178/304959/Advances-in-the-Exon-Intron-Database-EID"> EID</a><sup>1</sup>). However, due to the absence of updates, the wide expansions of sequencing data, and the new raised questions in the gene evolution, these databases are mainly out of the date. The most recent ones are <a href="https://www.ncbi.nlm.nih.gov/pubmed/26519469">JuncDB</a><sup>2</sup> and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5210635/">PIECE 2.0</a><sup>3</sup>, but the first one contains only orthologous gene isoforms and lacks the majority of intron data, and the second one focuses only on plants. The primary goal of our new <%= link_to 'exon-intron gene structure database (EIS DB)', eis_db_path %>  is to provide an easy access of comprehensive data of well-annotated genes in more than 100 eukaryotic genomes from different taxonomic groups to the scientists who study gene or intron evolution, and alternative splicing.
 		</p>
 		<p>
-			<h3> <%= link_to 'Go to the base', eis_db_path %> </h3>
+			As the main source of gene sequences and annotations, we have used <a href="http://www.ncbi.nlm.nih.gov/refseq/"> RefSeq</a><sup>4</sup> genome assemblies, which versions were current to March 2017. The corresponding gbk-files were downloaded from ftp-server of <a href="https://ftp.ncbi.nlm.nih.gov/genomes/">NCBI</a><sup>5</sup>. In addition, for each organism we also prepared extra input files with data about common names, taxonomy, chromosome number, etc. In total, there are 112 eukaryotic organisms in the  <%= link_to ' current EIS DB version', eis_db_path %>  that embraces such taxonomic categories as Vertebrates (birds, fishes, mammals, etc.), Invertebrates (insects, roundworms), Plants, and Fungi. To parse gbk-files, load and verify the obtained transformed data into EIS DB, a special software written on C++ has been developed. It works directly with the database control system. 
+		</p>
+		<p>
+			EIS DB is a relational database managed by PostgreSQL. Structurally, it contains 15 tables. The main ones are ‘Organisms’, ‘Genes’, ‘Isoforms’, ‘Exons’ and ‘Introns’. The others contain auxiliary data, e.g., taxonomy and intron types. The gene isoforms (and the corresponding exons and introns) that failed the verification are still kept in database, but they are labeled and available only by special request. Besides, the database includes fasta-files with sequences, references to which are present in ‘Gene’, ‘Exon’ and ‘Intron’ tables. 
+		</p>
+		<p>
+			Unlike earlier developed exon-intron structure databases, EIS DB allows working with either full set of isoforms or one ‘canonical’ isoform (the isoform with the biggest exon-intron structure or with the longest protein product).
+		</p>
+		<p>
+			As intron section of database is quite detailed – there are data about intron length, phase, sequence, splice sites, etc. – it makes EIS DB especially appealing for studying various intron features in different organisms such as phase vs length correlations, non-canonical splice sites distribution and etc. 
+		 <%= link_to 'The preliminary version of web interface of EIS DB', eis_db_path %> is already avaliable. Apart from web-version, the database could be downloaded to user’s PC for more advanced requests. 
+		</p>
+
+		<ol>
+		  <li> <a href="https://academic.oup.com/bib/article/7/2/178/304959/Advances-in-the-Exon-Intron-Database-EID">Shepelev, V. & Fedorov, A. Advances in the Exon-Intron Database (EID). Brief. Bioinform. 7, 178–185 (2006).</a> </li>
+		  <li> <a href="https://www.ncbi.nlm.nih.gov/pubmed/26519469"> Chorev, M., Guy, L. & Carmel, L. JuncDB: an exon-exon junction database. Nucleic Acids Res. 44, D101-9 (2016).</a></li>
+		  <li> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5210635/">Wang, Y. et al. PIECE 2.0: an update for the plant gene structure comparison and evolution database. Nucleic Acids Res. 45, 1015–1020 (2017).</a> </li>
+		  <li> <a href="http://www.ncbi.nlm.nih.gov/refseq/"> NCBI RefSeq Database. </a></li>
+		  <li> <a href="https://ftp.ncbi.nlm.nih.gov/genomes/">NCBI gbk-files</a></li>
+		</ol>
+		<p>
+			<h3> <%= link_to 'Go to the web interface', eis_db_path %> </h3>
 		</p>
 	</div>
 </div>
