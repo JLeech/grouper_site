@@ -28,8 +28,9 @@ class Reports < ApplicationRecord
     	report.save!
     	file = File.open(report.result_path, 'w')
     	if report.report_type = "gene"
-    		file.write(Genes.detailed_fields.join(",")+"\n")
+    		file.write(Genes.human_fields_names.join(",")+"\n")
     		Genes.count_detailed_statistics(JSON.parse(report.request)).each do |row|
+                puts "R: #{row}"
     			file.write(row.values.join(",")+"\n")
     		end
     	end

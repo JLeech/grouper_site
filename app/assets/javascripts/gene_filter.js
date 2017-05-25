@@ -1,30 +1,31 @@
+
 $(document).on("turbolinks:load", function() {
 	
   $('#gene-filter').queryBuilder({
-    default_filter: 'gene_name',
+    default_filter: 'genes.name',
     filters: [{
-      id: 'gene_name',
+      id: 'genes.name',
       label: 'Gene name',
       type: 'string',
       operators: ['equal', 'not_equal'],
       input: function(rule, name) {
         return '<input class="form-control gene_name" name ="'+name+'" placeholder="Search" autocomplete="off" type="search"> </input>';
       }},{
-        id: 'id_orthologous_groups',
+        id: 'genes.id_orthologous_groups',
         label: 'Ortho group',
         type: 'string',
         operators: ['equal', 'not_equal'],
         input: function(rule, name) {
           return '<input class="form-control ortho_group" name ='+name+' type="text"> </input>';
       }},{
-        id: 'gene_ncbi_id',
+        id: 'genes.ncbi_gene_id',
         label: 'Gene NCBI id',
         type: 'string',
         operators: ['equal', 'not_equal'],
         input: function(rule, name) {
           return '<input class="form-control gene_ncbi_id" name ='+name+' placeholder="Search" autocomplete="off" type="search"> </input>';
       }},{
-        id: 'prot_but_not_rna',
+        id: 'genes.protein_but_not_rna',
         label: 'Protein but not RNA',
         type: 'integer',
         input: 'radio',
@@ -41,7 +42,7 @@ $(document).on("turbolinks:load", function() {
       //   operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal']
       // },
       {
-        id: 'max_introns_count',
+        id: 'genes.max_introns_count',
         label: 'Max #introns' ,
         type: 'integer',
         operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal']

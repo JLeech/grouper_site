@@ -6,8 +6,8 @@ class ReportManager
   						   start_time: DateTime.now.strftime("%F %T %:z"), 
   						   report_type: "gene",
   						   state: Reports::CREATED)
-  	ReportManagerJob.perform_later report
-    #Reports.make_report(report)
+  	#ReportManagerJob.perform_later report
+    Reports.make_report(report)
   	return report
   end
 

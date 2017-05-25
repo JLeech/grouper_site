@@ -43,7 +43,7 @@ class Genes < ApplicationRecord
 	def self.org_part(org_ids)
 	    id_org_part = ""
 	    org_ids.each_with_index do |org_id, index|
-	      id_org_part += "id_organisms = #{org_id}"
+	      id_org_part += "genes.id_organisms = #{org_id}"
 	      id_org_part += " OR " if index < org_ids.length-1
 	    end
 	    return id_org_part
@@ -54,11 +54,10 @@ class Genes < ApplicationRecord
 	end
 
 	def self.fix_true_false(request)
-	    request = request.gsub("prot_but_not_rna = 0","protein_but_not_rna = false")
-	    request = request.gsub("prot_but_not_rna = 1","protein_but_not_rna = true")
-	    request = request.gsub("prot_but_not_rna != 0","protein_but_not_rna != false")
-	    request = request.gsub("prot_but_not_rna != 1","protein_but_not_rna != true")
-	    request = request.gsub("gene_name","name")
+	    request = request.gsub("protein_but_not_rna = 0","protein_but_not_rna = false")
+	    request = request.gsub("protein_but_not_rna = 1","protein_but_not_rna = true")
+	    request = request.gsub("protein_but_not_rna != 0","protein_but_not_rna != false")
+	    request = request.gsub("protein_but_not_rna != 1","protein_but_not_rna != true")
 	    request = request.gsub("\"","")
 	    return request		
 	end
@@ -68,12 +67,22 @@ class Genes < ApplicationRecord
 		organism_ids = JSON.parse(params["org_ids"])
 	    organism_names = JSON.parse(params["org_names"])
 	    id_org_part = org_part(organism_ids)
-	    match_genes_org_ids_request = "SELECT #{detailed_fields.join(",")} FROM genes WHERE ((" +request+") AND ("+id_org_part+") AND (genes.pseudo_gene = false) ) INNER JOIN organisms ON genes.id_organisms = organisms.id"
+	    match_genes_org_ids_request = "SELECT #{fields_for_select} FROM genes INNER JOIN organisms ON genes.id_organisms = organisms.id WHERE ((" +request+") AND ("+id_org_part+") AND (genes.pseudo_gene = false) )"
 	    return Genes.connection.execute(match_genes_org_ids_request)
 	end
 
+	def self.fields_for_select
+		pairs = detailed_fields.zip(human_fields_names)
+		return pairs.map { |pair| "#{pair[0]} as #{pair[1]}" }.join(",")
+
+	end
+
 	def self.detailed_fields
-		return ["organisms.name","genes.id_orthologous_groups","genes.name","genes.ncbi_gene_id","genes.backward_chain","genes.protein_but_not_rna","genes.startt","genes.endd","genes.start_code","genes.end_code","genes.max_introns_count"]
+		return ["organisms.name","genes.name","genes.id_orthologous_groups","genes.ncbi_gene_id","genes.backward_chain","genes.protein_but_not_rna","genes.startt","genes.endd","genes.start_code","genes.end_code","genes.max_introns_count"]
+	end
+
+	def self.human_fields_names
+		return ["organisms_name","name", "id_orthologous_groups","ncbi_gene_id","backward_chain","protein_but_not_rna","start","end","start_code","end_code","max_introns_count"]
 	end
 
 end
