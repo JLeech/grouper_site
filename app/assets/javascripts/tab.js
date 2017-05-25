@@ -95,8 +95,12 @@ var new_data = tabledata;
 var selected_organisms_ids = [];
 var selected_organisms_names = [];
 
+var loaded = 0;
+
 $(document).on("turbolinks:load", function() {
-  $("#organism_table").tabulator({
+  loaded += 1;
+  if (loaded < 1){}
+    $("#organism_table").tabulator({
     fitColumns:true,
     columns:[ //Define Table Colum
         { title: "Name", field: "name", sorter: "string", align: "left"},

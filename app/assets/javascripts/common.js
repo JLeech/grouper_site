@@ -9,6 +9,8 @@ $(document).on("turbolinks:load", function() {
   var intron_get_modal = document.getElementById('intron-query-get-modal');
   var intron_set_modal = document.getElementById('intron-query-set-modal');
 
+  var report_modal = document.getElementById('report-modal');
+
   window.onclick = function(event) {
     if (event.target == intron_get_modal) {
         intron_get_modal.style.display = "none";
@@ -33,6 +35,9 @@ $(document).on("turbolinks:load", function() {
     };
     if (event.target == setmodal) {
         setmodal.style.display = "none";
+    };
+    if (event.target == report_modal) {
+        report_modal.style.display = "none";
     };
   };
 

@@ -1,0 +1,11 @@
+<%if @report.nil?%>
+	<h2> Report not found </h2>
+<%else%>
+	<h2> State: <%= @report.state %> </h2>
+	<h2> Created at: <%= @report.start_time %> </h2>
+	<% if @report.state == Reports::FINISHED %>
+		<h2> <%= link_to "Download" ,:action => :download, :report_id => @report.uuid %> </h2>
+	<% end %>
+	<!-- <h2> Path: <%= @report.result_path %> </h2> -->
+<%end%>
+ 

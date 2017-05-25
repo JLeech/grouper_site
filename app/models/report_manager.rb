@@ -1,19 +1,26 @@
-require 'securerandom'
-
 class ReportManager
 
-  def make_gene_report
+  def self.make_gene_report(params)
+  	report = Reports.create(uuid: SecureRandom.uuid, 
+  						   request: params.to_json, 
+  						   start_time: DateTime.now.strftime("%F %T %:z"), 
+  						   report_type: "gene",
+  						   state: Reports::CREATED)
+  	ReportManagerJob.perform_later report
+    #Reports.make_report(report)
+  	return report
+  end
+
+  def self.make_exon_report(params)
 
   end
 
-  def make_exon_report
+  def self.make_intron_report(params)
+
   end
 
-  def make_intron_report
-  end
+  def self.find_report(params)
 
-  def find_report
   end
-
 
 end

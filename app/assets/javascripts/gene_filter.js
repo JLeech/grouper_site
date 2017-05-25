@@ -148,6 +148,27 @@ $(document).on("turbolinks:load", function() {
     $("#gene_table").tabulator("download", "csv", "gene_table(small).csv");
   });
 
+  $('#gene-load-full-table-button').on('click', function (e){
+    var rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
+    $.ajax({
+      contentType: "application/json",
+      url: '/make_gene_report',
+      data: {request: rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
+      triggerLength: 1,
+      async: true,
+      beforeSend: function() {
+        $("div#load-block").show();
+      },
+      error: function (err) {
+        $("div#load-block").hide();
+    }
+    }).done(function(data) {
+      $("div#report_path").html(data["report_path"])
+      $("div#report-modal").show();
+      $("div#load-block").hide();
+    });;
+  });
+
   // $.typeahead({
   //   input: 'input.gene_name',
   //   minLength: 1,

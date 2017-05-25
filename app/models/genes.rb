@@ -18,7 +18,7 @@ class Genes < ApplicationRecord
 	    org_request += id_org_part + " GROUP BY id_organisms"
 	 	Genes.connection.execute(org_request).to_a.each { |rec| result_table[rec["id_organisms"]]["genes_total"] = rec["count"] }
 
-	    match_genes_org_ids_request = "SELECT id_organisms, count(id_organisms) FROM genes WHERE ((" +request+") AND ("+id_org_part+")) GROUP BY id_organisms"	
+	    match_genes_org_ids_request = "SELECT id_organisms, count(id_organisms) FROM genes WHERE ((" +request+") AND ("+id_org_part+") AND (genes.pseudo_gene = false) ) GROUP BY id_organisms"
 	    Genes.connection.execute(match_genes_org_ids_request).to_a.each { |rec| result_table[rec["id_organisms"]]["selected_genes"] = rec["count"]}
 	    
 		Exons.get_gene_match(request,id_org_part).each { |rec| result_table[rec["id_organisms"]]["total_exons"] = rec["count"]}
@@ -49,6 +49,10 @@ class Genes < ApplicationRecord
 	    return id_org_part
 	end
 
+	def self.count_full_table(params, report)
+
+	end
+
 	def self.fix_true_false(request)
 	    request = request.gsub("prot_but_not_rna = 0","protein_but_not_rna = false")
 	    request = request.gsub("prot_but_not_rna = 1","protein_but_not_rna = true")
@@ -59,8 +63,17 @@ class Genes < ApplicationRecord
 	    return request		
 	end
 
-	def self.count_detailed_statistics(request)
-		return 
+	def self.count_detailed_statistics(params)
+		request = fix_true_false(params["request"])
+		organism_ids = JSON.parse(params["org_ids"])
+	    organism_names = JSON.parse(params["org_names"])
+	    id_org_part = org_part(organism_ids)
+	    match_genes_org_ids_request = "SELECT #{detailed_fields.join(",")} FROM genes WHERE ((" +request+") AND ("+id_org_part+") AND (genes.pseudo_gene = false) )"
+	    return Genes.connection.execute(match_genes_org_ids_request)
+	end
+
+	def self.detailed_fields
+		return ["organisms.name","genes.id_orthologous_groups","genes.name","genes.ncbi_gene_id","genes.backward_chain","genes.protein_but_not_rna","genes.startt","genes.endd","genes.start_code","genes.end_code","genes.max_introns_count"]
 	end
 
 end

@@ -2,8 +2,7 @@
 var str = ""
 
 $(document).on("turbolinks:load", function() {
-
-  $('#builder').queryBuilder({
+    $('#builder').queryBuilder({
     default_filter: 'name',
     filters: [{id: 'name',
     label: 'Name',
@@ -292,7 +291,7 @@ $(document).on("turbolinks:load", function() {
     },
     operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal']
     }]
-  }); 
+    });
 
   $('#btn-reset').on('click', function() {
     $('#builder').queryBuilder('reset');
