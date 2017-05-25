@@ -68,7 +68,7 @@ class Genes < ApplicationRecord
 		organism_ids = JSON.parse(params["org_ids"])
 	    organism_names = JSON.parse(params["org_names"])
 	    id_org_part = org_part(organism_ids)
-	    match_genes_org_ids_request = "SELECT #{detailed_fields.join(",")} FROM genes WHERE ((" +request+") AND ("+id_org_part+") AND (genes.pseudo_gene = false) )"
+	    match_genes_org_ids_request = "SELECT #{detailed_fields.join(",")} FROM genes WHERE ((" +request+") AND ("+id_org_part+") AND (genes.pseudo_gene = false) ) INNER JOIN organisms ON genes.id_organisms = organisms.id"
 	    return Genes.connection.execute(match_genes_org_ids_request)
 	end
 
