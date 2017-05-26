@@ -9,7 +9,7 @@ class Introns < ApplicationRecord
         gene_request = Genes.fix_true_false(params["gene_request"])
         intron_request = Exons.fix_true_false(params["request"])
         id_org_part = Genes.org_part(JSON.parse(params["org_ids"]))
-        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} WHERE #{id_org_part} AND #{gene_request} AND #{Genes.additional_gene_params} AND #{intron_request} AND #{additional_intron_params}"
+        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} WHERE ( #{id_org_part} ) AND ( #{gene_request} ) AND ( #{Genes.additional_gene_params} AND #{intron_request} AND #{additional_intron_params} )"
         return Exons.connection.execute(request)
     end
 
