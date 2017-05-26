@@ -27,13 +27,24 @@ class Reports < ApplicationRecord
     	report.state = Reports::INPROCESS
     	report.save!
     	file = File.open(report.result_path, 'w')
-    	if report.report_type = "gene"
-    		file.write(Genes.human_fields_names.join(",")+"\n")
+    	if report.report_type == "gene"
+            file.write(Genes.human_fields_names.join(",")+"\n")
     		Genes.count_detailed_statistics(JSON.parse(report.request)).each do |row|
-                puts "R: #{row}"
     			file.write(row.values.join(",")+"\n")
     		end
     	end
+        if report.report_type == "exon"
+            file.write(Exons.human_fields_names.join(",")+"\n")
+            Exons.count_detailed_statistics(JSON.parse(report.request)).each do |row|
+                file.write(row.values.join(",")+"\n")
+            end
+        end
+        if report.report_type == "intron"
+            file.write(Introns.human_fields_names.join(",")+"\n")
+            Introns.count_detailed_statistics(JSON.parse(report.request)).each do |row|
+                file.write(row.values.join(",")+"\n")
+            end
+        end
     	file.close
     	report.state = Reports::FINISHED
     	report.save!

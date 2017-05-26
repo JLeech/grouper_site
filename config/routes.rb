@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get  '/gene_ncbis', to: 'api#gene_ncbis'
   get  '/apply_gene_query', to: 'api#apply_gene_query'
   get  '/make_gene_report', to: 'reports#make_gene_report'
+  get  '/make_exon_report', to: 'reports#make_exon_report'
+  get  '/make_intron_report', to: 'reports#make_intron_report'
   # get  '/organism_names', to: 'api#organism_names'
   get  '/download', to: 'reports#download'
   resources :loads

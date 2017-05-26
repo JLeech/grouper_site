@@ -163,8 +163,8 @@ $(document).on("turbolinks:load", function() {
       error: function (err) {
         $("div#load-block").hide();
     }
-    }).done(function(data) {
-      $("div#report_path").html(data["report_path"])
+    }).done(function(answer) {
+      $("div#report_path").html(answer["report_path"])
       $("div#report-modal").show();
       $("div#load-block").hide();
     });;

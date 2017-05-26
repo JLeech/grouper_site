@@ -1,14 +1,14 @@
 $(document).on("turbolinks:load", function() {
 	
   $('#exon-filter').queryBuilder({
-    default_filter: 'length',
+    default_filter: 'exons.lengthh',
     filters: [{
-      id: 'length',
+      id: 'exons.lengthh',
       label: 'Exon length',
       type: 'integer',
       operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal'],
       },{
-        id: 'start_phase',
+        id: 'exons.start_phase',
         label: 'Exon start phase',
         type: 'integer',
         values: {0: '0', 1: '1', 2: '2',},
@@ -19,7 +19,7 @@ $(document).on("turbolinks:load", function() {
           step: 1
         }
       },{
-        id: 'end_phase',
+        id: 'exons.end_phase',
         label: 'Exon end phase',
         type: 'integer',
         values: {0: '0', 1: '1', 2: '2',},
@@ -30,7 +30,7 @@ $(document).on("turbolinks:load", function() {
           step: 1
         }
       },{
-        id: 'length_phase',
+        id: 'exons.length_phase',
         label: 'Exon length phase',
         type: 'integer',
         values: {0: '0', 1: '1', 2: '2',},
@@ -41,19 +41,19 @@ $(document).on("turbolinks:load", function() {
           step: 1
         }
       },{
-        id: 'start_codon',
+        id: 'exons.start_codon',
         label: 'Exon start codon',
         type: 'string',
         operators: ['equal', 'not_equal'],
-        validation: {format: /^([A-Z]{3})$/}    
+        validation: {format: /^([A-Z]{3})$/}
       },{
-        id: 'end_codon',
+        id: 'exons.end_codon',
         label: 'Exon end codon',
         type: 'string',
         operators: ['equal', 'not_equal'],
         validation: {format: /^([A-Z]{3})$/}     
       },{
-        id: 'warning_n_in_sequence',
+        id: 'exons.warning_n_in_sequence',
         label: 'Exon sequence has N',
         type: 'integer',
         input: 'radio',
@@ -71,7 +71,6 @@ $(document).on("turbolinks:load", function() {
 
   var exon_get_modal = document.getElementById('exon-query-get-modal');
   var exon_set_modal = document.getElementById('exon-query-set-modal');
-
 
   $('#exon-btn-set').on('click', function() {
     $('#btn-exon-query-set-from-file').value = null
@@ -122,7 +121,6 @@ $(document).on("turbolinks:load", function() {
       contentType: "application/json",
       url: '/apply_exon_query',
       data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
-      triggerLength: 1,
       async: true,
       beforeSend: function() {
         $("div#load-block").show();
@@ -138,6 +136,27 @@ $(document).on("turbolinks:load", function() {
 
   $('#exon-load-table-button').on('click', function (e) {
     $("#gene_table").tabulator("download", "csv", "gene_table(small).csv");
+  });
+
+  $('#exon-load-full-table-button').on('click', function (e){
+    var gene_rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
+    var rules = JSON.stringify($('#exon-filter').queryBuilder('getSQL')["sql"], null, 2);
+    $.ajax({
+      contentType: "application/json",
+      url: '/make_exon_report',
+      data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2)},
+      async: true,
+      beforeSend: function() {
+        $("div#load-block").show();
+      },
+      error: function (err) {
+        $("div#load-block").hide();
+    }
+    }).done(function(data) {
+      $("div#report_path").html(data["report_path"])
+      $("div#report-modal").show();
+      $("div#load-block").hide();
+    });;
   });
 
   // $.typeahead({

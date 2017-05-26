@@ -5,9 +5,22 @@ class ReportsController < ApplicationController
   end
 
   def make_gene_report
+    puts "GENE REPORT"
   	report = ReportManager.make_gene_report(params)
   	report_path = view_context.link_to( "here", controller: "reports", action: "show", id: report.uuid)
   	render json: {report_path: report_path}
+  end
+
+  def make_exon_report
+    report = ReportManager.make_exon_report(params)
+    report_path = view_context.link_to( "here", controller: "reports", action: "show", id: report.uuid)
+    render json: {report_path: report_path}
+  end
+
+  def make_intron_report
+    report = ReportManager.make_intron_report(params)
+    report_path = view_context.link_to( "here", controller: "reports", action: "show", id: report.uuid)
+    render json: {report_path: report_path}
   end
 
   def download

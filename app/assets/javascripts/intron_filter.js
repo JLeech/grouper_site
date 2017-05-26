@@ -1,14 +1,14 @@
 $(document).on("turbolinks:load", function() {
 	
   $('#intron-filter').queryBuilder({
-    default_filter: 'lengthh',
+    default_filter: 'introns.lengthh',
     filters: [{
-      id: 'lengthh',
+      id: 'introns.lengthh',
       label: 'Length',
       type: 'integer',
       operators: ['equal', 'not_equal','less','less_or_equal','greater','greater_or_equal'],
       },{
-        id: 'phase',
+        id: 'introns.phase',
         label: 'Phase',
         type: 'integer',
         values: {0: '0', 1: '1', 2: '2',},
@@ -19,7 +19,7 @@ $(document).on("turbolinks:load", function() {
           step: 1
         }
       },{
-        id: 'length_phase',
+        id: 'introns.length_phase',
         label: 'Length phase',
         type: 'integer',
         values: {0: '0', 1: '1', 2: '2',},
@@ -30,19 +30,19 @@ $(document).on("turbolinks:load", function() {
           step: 1
         }
       },{
-        id: 'start_dinucleotide',
+        id: 'introns.start_dinucleotide',
         label: 'Start dinucleotide',
         type: 'string',
         operators: ['equal', 'not_equal'],
-        validation: {format: /^([A-Z]{2})$/}      
+        validation: {format: /^([A-Z]{2})$/}
       },{
-        id: 'end_dinucleotide',
+        id: 'introns.end_dinucleotide',
         label: 'End dinucleotide',
         type: 'string',
         operators: ['equal', 'not_equal'],
         validation: {format: /^([A-Z]{2})$/}
       },{
-        id: 'warning_n_in_sequence',
+        id: 'introns.warning_n_in_sequence',
         label: 'Intron sequence has N',
         type: 'integer',
         input: 'radio',
@@ -118,14 +118,35 @@ $(document).on("turbolinks:load", function() {
       error: function (err) {
         $("div#load-block").hide();
     }
-    }).done(function(data) {
-      $("#intron_table").tabulator("setData", data);
+    }).done(function(answer) {
+      $("#intron_table").tabulator("setData", answer);
       $("div#load-block").hide();
     });;
   });
 
   $('#intron-load-table-button').on('click', function (e) {
     $("#gene_table").tabulator("download", "csv", "gene_table(small).csv");
+  });
+
+  $('#intron-load-full-table-button').on('click', function (e){
+    var gene_rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
+    var rules = JSON.stringify($('#intron-filter').queryBuilder('getSQL')["sql"], null, 2);
+    $.ajax({
+      contentType: "application/json",
+      url: '/make_intron_report',
+      data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2)},
+      async: true,
+      beforeSend: function() {
+        $("div#load-block").show();
+      },
+      error: function (err) {
+        $("div#load-block").hide();
+    }
+    }).done(function(answer) {
+      $("div#report_path").html(answer["report_path"])
+      $("div#report-modal").show();
+      $("div#load-block").hide();
+    });;
   });
 
 });
