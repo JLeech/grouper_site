@@ -152,10 +152,18 @@ $(document).on("turbolinks:load", function() {
       error: function (err) {
         $("div#load-block").hide();
     }
-    }).done(function(data) {
-      $("div#report_path").html(data["report_path"])
-      $("div#report-modal").show();
+    }).done(function(answer) {
+      $("h2#report_id").html(answer["report_id"]);
+      $("h2#report_state").html(answer["report_state"]);
+      $("h2#report_created_at").html(answer["report_created_at"]);
+      $("h2#report_load_link").html(answer["report_load_link"]);
+      $('input#report_search').val(answer["just_id"]);
       $("div#load-block").hide();
+      $("a#reports_tab").click();
+      if(answer["load_link"] != undefined){
+        $("a#download_report_btn").removeClass("disabled");
+        $("a#download_report_btn").attr('href',answer["load_link"])
+      }
     });;
   });
 

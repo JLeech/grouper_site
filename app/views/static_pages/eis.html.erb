@@ -5,19 +5,22 @@
     <div id="inner_center">
         <ul class="nav nav-tabs tabs-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#organism_settings" role="tab">Step 1. Select organisms </a>
+            <a class="nav-link active" id="organism_select_tab" data-toggle="tab" href="#organism_settings" role="tab">Step 1. Select organisms </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#gene_settings" role="tab">Step 2. Select genes</a>
+            <a class="nav-link" id="gene_select_tab" data-toggle="tab" href="#gene_settings" role="tab">Step 2. Select genes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#exons_settings" role="tab">Step 3.1. Select exons</a>
+            <a class="nav-link" id="exons_select_tab" data-toggle="tab" href="#exons_settings" role="tab">Step 3.1. Select exons</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#introns_settings" role="tab">Step 3.2. Select introns</a>
+            <a class="nav-link" id="introns_select_tab" data-toggle="tab" href="#introns_settings" role="tab">Step 3.2. Select introns</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#ortho_groups" role="tab">Orthology groups</a>
+            <a class="nav-link" id="ortho_select_tab" data-toggle="tab" href="#ortho_groups" role="tab">Orthology groups</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="reports_tab" data-toggle="tab" href="#reports" role="tab">Reports</a>
           </li>
         </ul>
         <div class="tab-content">
@@ -35,6 +38,9 @@
             </div>
             <div class="tab-pane" id="ortho_groups" role="tabpanel">            
               <%= render "static_pages/ortho/ortho_select_tab" %>
+            </div>
+            <div class="tab-pane" id="reports" role="tabpanel">            
+              <%= render "reports/in_tab" %>
             </div>
         </div>
         <div class="ex_table" id="organism_table" ></div>
@@ -146,17 +152,6 @@
           <button id="btn-intron-query-set" class="btn btn-success" data-target="basic">Set</button>
           <input type="file" id="btn-intron-query-set-from-file" class="btn btn-warning" />
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="report-modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>New report added o queue</h2>
-      </div>
-      <div class="modal-body">
-        Your report is avaliable <div id="report_path"></div>
       </div>
     </div>
   </div>

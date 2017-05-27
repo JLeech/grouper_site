@@ -23,10 +23,23 @@ class Reports < ApplicationRecord
     	return Rails.root.to_s+"/tmp/report_#{self.uuid}.csv"
     end
 
+    def for_html_tab
+        report_id = "Report id: #{self.uuid}"
+        report_state = "State: #{self.state}"
+        report_created_at = "Created at: #{self.start_time}"
+        just_id = self.uuid
+        return ({ report_id: report_id,report_state: report_state,report_created_at: report_created_at, just_id: just_id })
+    end
+
+    def ready?
+        self.state == Reports::FINISHED
+    end
+
     def self.make_report(report)
     	report.state = Reports::INPROCESS
     	report.save!
     	file = File.open(report.result_path, 'w')
+
     	if report.report_type == "gene"
             file.write(Genes.human_fields_names.join(",")+"\n")
     		Genes.count_detailed_statistics(JSON.parse(report.request)).each do |row|

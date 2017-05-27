@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get  '/make_intron_report', to: 'reports#make_intron_report'
   # get  '/organism_names', to: 'api#organism_names'
   get  '/download', to: 'reports#download'
+  get  '/report_from_tab', to: 'reports#report_from_tab'
   resources :loads
   resources :reports
 end
