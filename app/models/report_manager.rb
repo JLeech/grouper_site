@@ -2,22 +2,22 @@ class ReportManager
 
   def self.make_gene_report(params)
   	report = create_report(params, "gene")
-  	#ReportManagerJob.perform_later report
-    Reports.make_report(report)
+  	ReportManagerJob.perform_later report
+    #Reports.make_report(report)
   	return report
   end
 
   def self.make_exon_report(params)
     report = create_report(params, "exon")
-    #ReportManagerJob.perform_later report
-    Reports.make_report(report)
+    ReportManagerJob.perform_later report
+    #Reports.make_report(report)
     return report
   end
 
   def self.make_intron_report(params)
     report = create_report(params, "intron")
-    #ReportManagerJob.perform_later report
-    Reports.make_report(report)
+    ReportManagerJob.perform_later report
+    #Reports.make_report(report)
     return report
 
   end 
