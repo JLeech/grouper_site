@@ -3,6 +3,7 @@ $(document).on("turbolinks:load", function() {
 	
   $('#gene-filter').queryBuilder({
     default_filter: 'genes.name',
+    display_empty_filter: false,
     filters: [{
       id: 'genes.name',
       label: 'Gene name',

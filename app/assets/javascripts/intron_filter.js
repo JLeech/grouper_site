@@ -2,6 +2,7 @@ $(document).on("turbolinks:load", function() {
 	
   $('#intron-filter').queryBuilder({
     default_filter: 'introns.lengthh',
+    display_empty_filter: false,
     filters: [{
       id: 'introns.lengthh',
       label: 'Length',

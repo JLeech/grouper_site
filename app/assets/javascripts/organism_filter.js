@@ -4,6 +4,7 @@ var str = ""
 $(document).on("turbolinks:load", function() {
     $('#builder').queryBuilder({
     default_filter: 'name',
+    display_empty_filter: false,
     filters: [{id: 'name',
     label: 'Name',
     type: 'string',

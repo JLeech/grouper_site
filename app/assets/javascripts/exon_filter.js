@@ -2,6 +2,7 @@ $(document).on("turbolinks:load", function() {
 	
   $('#exon-filter').queryBuilder({
     default_filter: 'exons.lengthh',
+    display_empty_filter: false,
     filters: [{
       id: 'exons.lengthh',
       label: 'Exon length',
