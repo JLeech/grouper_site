@@ -46,13 +46,17 @@ $(document).on("turbolinks:load", function() {
         label: 'Exon start codon',
         type: 'string',
         operators: ['equal', 'not_equal'],
-        validation: {format: /^([A-Z]{3})$/}
+        validation: {format: /^([A-Z]{3})$/,
+          messages: {format: 'Format is three capital letters'}
+        }
       },{
         id: 'exons.end_codon',
         label: 'Exon end codon',
         type: 'string',
         operators: ['equal', 'not_equal'],
-        validation: {format: /^([A-Z]{3})$/}     
+        validation: {format: /^([A-Z]{3})$/,
+          messages: {format: 'Format is three capital letters'}
+        }     
       },{
         id: 'exons.warning_n_in_sequence',
         label: 'Exon sequence has N',

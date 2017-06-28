@@ -8,7 +8,8 @@ $(document).on("turbolinks:load", function() {
       id: 'genes.name',
       label: 'Gene name',
       type: 'string',
-      operators: ['equal', 'not_equal'],
+      operators: ['equal', 'not_equal', 'contains', 'not_contains'],
+      validation: {format: /^([A-Za-z0-9]*)$/},
       input: function(rule, name) {
         return '<input class="form-control gene_name" name ="'+name+'" placeholder="Search" autocomplete="off" type="search"> </input>';
       }},{
@@ -16,6 +17,9 @@ $(document).on("turbolinks:load", function() {
         label: 'Ortho group',
         type: 'string',
         operators: ['equal', 'not_equal'],
+        validation: {format: /^([0-9]*)$/,  
+          messages: {format: 'Only digits avaliable'}
+        },
         input: function(rule, name) {
           return '<input class="form-control ortho_group" name ='+name+' type="text"> </input>';
       }},{
@@ -23,6 +27,9 @@ $(document).on("turbolinks:load", function() {
         label: 'Gene NCBI id',
         type: 'string',
         operators: ['equal', 'not_equal'],
+        validation: {format: /^([0-9]*)$/,
+          messages: {format: 'Only digits avaliable'}
+        },
         input: function(rule, name) {
           return '<input class="form-control gene_ncbi_id" name ='+name+' placeholder="Search" autocomplete="off" type="search"> </input>';
       }},{

@@ -50,6 +50,7 @@ class Genes < ApplicationRecord
 	end
 
 	def self.fix_true_false(request)
+		puts "\n\n#{request}\n\n"
 	    request = request.gsub("protein_but_not_rna = 0","protein_but_not_rna = false")
 	    request = request.gsub("protein_but_not_rna = 1","protein_but_not_rna = true")
 	    request = request.gsub("protein_but_not_rna != 0","protein_but_not_rna != false")

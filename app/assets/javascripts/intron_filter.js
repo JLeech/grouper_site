@@ -35,13 +35,17 @@ $(document).on("turbolinks:load", function() {
         label: 'Start dinucleotide',
         type: 'string',
         operators: ['equal', 'not_equal'],
-        validation: {format: /^([A-Z]{2})$/}
+        validation: {format: /^([A-Z]{2})$/,
+          messages: {format: 'Format is two capital letters'}
+        }
       },{
         id: 'introns.end_dinucleotide',
         label: 'End dinucleotide',
         type: 'string',
         operators: ['equal', 'not_equal'],
-        validation: {format: /^([A-Z]{2})$/}
+        validation: {format: /^([A-Z]{2})$/,
+          messages: {format: 'Format is two capital letters'}
+      }
       },{
         id: 'introns.warning_n_in_sequence',
         label: 'Intron sequence has N',
