@@ -7,12 +7,20 @@ class Introns < ApplicationRecord
 
     def self.count_detailed_statistics(params)
         gene_request = Genes.make_request_str(params["gene_request"])
-        intron_request = Exons.fix_true_false(params["request"])
+        intron_request = Exons.make_request_str(params["request"])
         id_org_part = Genes.org_part(JSON.parse(params["org_ids"]))
-        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} WHERE ( #{id_org_part} ) AND #{gene_request} ( #{Genes.additional_gene_params} AND #{intron_request} AND #{additional_intron_params} )"
+        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} WHERE ( #{id_org_part} ) AND #{gene_request} ( #{Genes.additional_gene_params} AND #{intron_request} #{additional_intron_params} )"
         return Exons.connection.execute(request)
     end
 
+    def self.make_request_str(params_request)
+        request_str = ""
+        if !params_request.gsub("\"","").empty?
+            request = fix_true_false(params_request)
+            request_str = "(" +request+") AND "
+        end
+        return request_str
+    end
 
     def self.fix_true_false(request)
         request = request.gsub("warning_n_in_sequence = 0","warning_n_in_sequence = false")

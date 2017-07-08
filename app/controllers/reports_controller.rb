@@ -12,6 +12,7 @@ class ReportsController < ApplicationController
       response = report.for_html_tab
       response["load_link"] = report_path if report.ready?
     end
+    puts response
     render json: response
   end
 

@@ -126,23 +126,27 @@ $(document).on("turbolinks:load", function() {
   });
 
   $('#gene-btn-apply').on('click', function(){
-    var rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
-    $.ajax({
-      contentType: "application/json",
-      url: '/apply_gene_query',
-      data: {request: rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
-      triggerLength: 1,
-      async: true,
-      beforeSend: function() {
-        $("div#load-block").show();
-      },
-      error: function (err) {
+    var rules_string = $('#gene-filter').queryBuilder('getSQL')["sql"]
+    var rules = JSON.stringify(rules_string, null, 2);
+    var no_rules = $('#gene-filter li').length == 0
+    if ($('#gene-filter').queryBuilder('validate') || no_rules){
+      $.ajax({
+        contentType: "application/json",
+        url: '/apply_gene_query',
+        data: {request: rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
+        triggerLength: 1,
+        async: true,
+        beforeSend: function() {
+          $("div#load-block").show();
+        },
+        error: function (err) {
+          $("div#load-block").hide();
+      }
+      }).done(function(data) {
+        $("#gene_table").tabulator("setData", data);
         $("div#load-block").hide();
+      });
     }
-    }).done(function(data) {
-      $("#gene_table").tabulator("setData", data);
-      $("div#load-block").hide();
-    });;
   });
 
   $('input.gene_name').typeahead({
@@ -159,31 +163,34 @@ $(document).on("turbolinks:load", function() {
 
   $('#gene-load-full-table-button').on('click', function (e){
     var rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
-    $.ajax({
-      contentType: "application/json",
-      url: '/make_gene_report',
-      data: {request: rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
-      triggerLength: 1,
-      async: true,
-      beforeSend: function() {
-        $("div#load-block").show();
-      },
-      error: function (err) {
-        $("div#load-block").hide();
-    }
-    }).done(function(answer) {
-      $("h2#report_id").html(answer["report_id"]);
-      $("h2#report_state").html(answer["report_state"]);
-      $("h2#report_created_at").html(answer["report_created_at"]);
-      $("h2#report_load_link").html(answer["report_load_link"]);
-      $('input#report_search').val(answer["just_id"]);
-      $("div#load-block").hide();
-      $("a#reports_tab").click();
-      if(answer["load_link"] != undefined){
-        $("a#download_report_btn").removeClass("disabled");
-        $("a#download_report_btn").attr('href',answer["load_link"])
+    var no_rules = $('#gene-filter li').length == 0
+    if ($('#gene-filter').queryBuilder('validate') || no_rules){
+      $.ajax({
+        contentType: "application/json",
+        url: '/make_gene_report',
+        data: {request: rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
+        triggerLength: 1,
+        async: true,
+        beforeSend: function() {
+          $("div#load-block").show();
+        },
+        error: function (err) {
+          $("div#load-block").hide();
       }
-    });;
+      }).done(function(answer) {
+        $("h2#report_id").html(answer["report_id"]);
+        $("h2#report_state").html(answer["report_state"]);
+        $("h2#report_created_at").html(answer["report_created_at"]);
+        $("h2#report_load_link").html(answer["report_load_link"]);
+        $('input#report_search').val(answer["just_id"]);
+        $("div#load-block").hide();
+        $("a#reports_tab").click();
+        if(answer["load_link"] != undefined){
+          $("a#download_report_btn").removeClass("disabled");
+          $("a#download_report_btn").attr('href',answer["load_link"])
+        }
+      });
+    }
   });
 
   // $.typeahead({

@@ -1,3 +1,11 @@
+function all_valid_for_exon() {
+    var no_gene_rules = $('#gene-filter li').length == 0
+    var gene_valid = $('#gene-filter').queryBuilder('validate')
+    var no_exon_rules = $('#exon-filter li').length == 0
+    var exon_valid = $('#exon-filter').queryBuilder('validate')
+    return (( gene_valid || no_gene_rules ) & ( exon_valid || no_exon_rules ))
+}
+
 $(document).on("turbolinks:load", function() {
 	
   $('#exon-filter').queryBuilder({
@@ -122,21 +130,23 @@ $(document).on("turbolinks:load", function() {
   $('#exon-btn-apply').on('click', function(){
     var gene_rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
     var rules = JSON.stringify($('#exon-filter').queryBuilder('getSQL')["sql"], null, 2);
-    $.ajax({
-      contentType: "application/json",
-      url: '/apply_exon_query',
-      data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
-      async: true,
-      beforeSend: function() {
-        $("div#load-block").show();
-      },
-      error: function (err) {
+    if (all_valid_for_exon()){
+      $.ajax({
+        contentType: "application/json",
+        url: '/apply_exon_query',
+        data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
+        async: true,
+        beforeSend: function() {
+          $("div#load-block").show();
+        },
+        error: function (err) {
+          $("div#load-block").hide();
+      }
+      }).done(function(data) {
+        $("#exon_table").tabulator("setData", data);
         $("div#load-block").hide();
+      });
     }
-    }).done(function(data) {
-      $("#exon_table").tabulator("setData", data);
-      $("div#load-block").hide();
-    });;
   });
 
   $('#exon-load-table-button').on('click', function (e) {
@@ -146,30 +156,33 @@ $(document).on("turbolinks:load", function() {
   $('#exon-load-full-table-button').on('click', function (e){
     var gene_rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
     var rules = JSON.stringify($('#exon-filter').queryBuilder('getSQL')["sql"], null, 2);
-    $.ajax({
-      contentType: "application/json",
-      url: '/make_exon_report',
-      data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2)},
-      async: true,
-      beforeSend: function() {
-        $("div#load-block").show();
-      },
-      error: function (err) {
-        $("div#load-block").hide();
-    }
-    }).done(function(answer) {
-      $("h2#report_id").html(answer["report_id"]);
-      $("h2#report_state").html(answer["report_state"]);
-      $("h2#report_created_at").html(answer["report_created_at"]);
-      $("h2#report_load_link").html(answer["report_load_link"]);
-      $('input#report_search').val(answer["just_id"]);
-      $("div#load-block").hide();
-      $("a#reports_tab").click();
-      if(answer["load_link"] != undefined){
-        $("a#download_report_btn").removeClass("disabled");
-        $("a#download_report_btn").attr('href',answer["load_link"])
+
+    if (all_valid_for_exon()){
+      $.ajax({
+        contentType: "application/json",
+        url: '/make_exon_report',
+        data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2)},
+        async: true,
+        beforeSend: function() {
+          $("div#load-block").show();
+        },
+        error: function (err) {
+          $("div#load-block").hide();
       }
-    });;
+      }).done(function(answer) {
+        $("h2#report_id").html(answer["report_id"]);
+        $("h2#report_state").html(answer["report_state"]);
+        $("h2#report_created_at").html(answer["report_created_at"]);
+        $("h2#report_load_link").html(answer["report_load_link"]);
+        $('input#report_search').val(answer["just_id"]);
+        $("div#load-block").hide();
+        $("a#reports_tab").click();
+        if(answer["load_link"] != undefined){
+          $("a#download_report_btn").removeClass("disabled");
+          $("a#download_report_btn").attr('href',answer["load_link"])
+        }
+      });
+    }
   });
 
   // $.typeahead({

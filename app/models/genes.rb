@@ -25,7 +25,6 @@ class Genes < ApplicationRecord
 		Introns.get_gene_match(request, id_org_part).each { |rec| result_table[rec["id_organisms"]]["total_introns"] = rec["count"]}
 		Isoforms.get_gene_match(request, id_org_part).each { |rec| result_table[rec["id_organisms"]]["selected_isoforms"] = rec["count"]}
 		Isoforms.get_all_org(id_org_part).each { |rec| result_table[rec["id_organisms"]]["isoforms"] = rec["count"]}
-
 	    result_table.each do |key, value|
 	      value["percent_selected_genes"] = ((value["selected_genes"].to_f/value["genes_total"].to_f)*100).round(2)
 	      value["selected_genes"] ||= 0
