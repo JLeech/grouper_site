@@ -1,15 +1,15 @@
 class Introns < ApplicationRecord
 
     def self.get_gene_match(request,id_org_part)
-        introns = Introns.connection.execute("SELECT genes.id_organisms,count(genes.id_organisms) FROM genes,introns WHERE ((#{request}) AND (#{id_org_part}) AND (introns.id_genes = genes.id) AND (introns.error_in_isoform = false) AND (introns.from_main_isoform = true)) GROUP BY genes.id_organisms").to_a
+        introns = Introns.connection.execute("SELECT genes.id_organisms,count(genes.id_organisms) FROM genes,introns WHERE ( #{request} (#{id_org_part}) AND (introns.id_genes = genes.id) AND (introns.error_in_isoform = false) AND (introns.from_main_isoform = true)) GROUP BY genes.id_organisms").to_a
         return introns
     end
 
     def self.count_detailed_statistics(params)
-        gene_request = Genes.fix_true_false(params["gene_request"])
+        gene_request = Genes.make_request_str(params["gene_request"])
         intron_request = Exons.fix_true_false(params["request"])
         id_org_part = Genes.org_part(JSON.parse(params["org_ids"]))
-        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} WHERE ( #{id_org_part} ) AND ( #{gene_request} ) AND ( #{Genes.additional_gene_params} AND #{intron_request} AND #{additional_intron_params} )"
+        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} WHERE ( #{id_org_part} ) AND #{gene_request} ( #{Genes.additional_gene_params} AND #{intron_request} AND #{additional_intron_params} )"
         return Exons.connection.execute(request)
     end
 

@@ -6,9 +6,12 @@ class ReportsController < ApplicationController
 
   def report_from_tab
     report = Reports.find_by_uuid(params[:report_id])
-    report_path = "/download?report_id=#{report.uuid}"
-    response = report.for_html_tab
-    response["load_link"] = report_path if report.ready?
+    response = Reports.not_found_response
+    if !report.nil?
+      report_path = "/download?report_id=#{report.uuid}"
+      response = report.for_html_tab
+      response["load_link"] = report_path if report.ready?
+    end
     render json: response
   end
 

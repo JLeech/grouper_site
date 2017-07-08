@@ -1,16 +1,16 @@
 class Exons < ApplicationRecord
 
     def self.get_gene_match(request,id_org_part)
-        exons = Exons.connection.execute("SELECT genes.id_organisms,count(genes.id_organisms) FROM genes,exons WHERE ((#{request}) AND (#{id_org_part}) AND #{additional_exon_params} ) GROUP BY genes.id_organisms").to_a
+        exons = Exons.connection.execute("SELECT genes.id_organisms,count(genes.id_organisms) FROM genes,exons WHERE (#{request} (#{id_org_part}) AND #{additional_exon_params} ) GROUP BY genes.id_organisms").to_a
         return exons
     end
 
 
     def self.count_detailed_statistics(params)
-        gene_request = Genes.fix_true_false(params["gene_request"])
+        gene_request = Genes.make_request_str(params["gene_request"])
         exon_request = Exons.fix_true_false(params["request"])
         id_org_part = Genes.org_part(JSON.parse(params["org_ids"]))
-        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_exons} WHERE ( #{id_org_part} )AND ( #{gene_request} ) AND ( #{Genes.additional_gene_params} AND #{exon_request} AND #{additional_exon_params} )"
+        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_exons} WHERE ( #{id_org_part} )AND #{gene_request} ( #{Genes.additional_gene_params} AND #{exon_request} AND #{additional_exon_params} )"
         return Exons.connection.execute(request)
     end
 

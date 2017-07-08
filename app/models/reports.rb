@@ -28,7 +28,7 @@ class Reports < ApplicationRecord
         report_state = "State: #{self.state}"
         report_created_at = "Created at: #{self.start_time}"
         just_id = self.uuid
-        return ({ report_id: report_id,report_state: report_state,report_created_at: report_created_at, just_id: just_id })
+        return ({ report_id: report_id, report_state: report_state, report_created_at: report_created_at, just_id: just_id })
     end
 
     def ready?
@@ -61,6 +61,11 @@ class Reports < ApplicationRecord
     	file.close
     	report.state = Reports::FINISHED
     	report.save!
+    end
+
+    def self.not_found_response 
+        report_state = "Report not found"
+        return ({ report_id: "", report_state: report_state, report_created_at: "", just_id: 0 })
     end
 
     def self.find_by_uuid(uuid)

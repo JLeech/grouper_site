@@ -3,8 +3,8 @@ class Genes < ApplicationRecord
 
 	def self.count_statistics_table(params)
 	    result_table = Hash.new { |hash, key| hash[key] = {} }
-	    request = fix_true_false(params[:request])
-	
+	   	request = make_request_str(params[:request])
+	    
 	    organism_ids = JSON.parse(params[:org_ids])
 	    organism_names = JSON.parse(params[:org_names])
 	    organism_names.each_with_index do |name, index| 
@@ -18,12 +18,12 @@ class Genes < ApplicationRecord
 	    org_request += id_org_part + " GROUP BY id_organisms"
 	 	Genes.connection.execute(org_request).to_a.each { |rec| result_table[rec["id_organisms"]]["genes_total"] = rec["count"] }
 
-	    match_genes_org_ids_request = "SELECT id_organisms, count(id_organisms) FROM genes WHERE ((" +request+") AND ("+id_org_part+") AND (genes.pseudo_gene = false) ) GROUP BY id_organisms"
+	    match_genes_org_ids_request = "SELECT id_organisms, count(id_organisms) FROM genes WHERE (#{request} ("+id_org_part+") AND (genes.pseudo_gene = false) ) GROUP BY id_organisms"
 	    Genes.connection.execute(match_genes_org_ids_request).to_a.each { |rec| result_table[rec["id_organisms"]]["selected_genes"] = rec["count"]}
 	    
-		Exons.get_gene_match(request,id_org_part).each { |rec| result_table[rec["id_organisms"]]["total_exons"] = rec["count"]}
-		Introns.get_gene_match(request,id_org_part).each { |rec| result_table[rec["id_organisms"]]["total_introns"] = rec["count"]}
-		Isoforms.get_gene_match(request,id_org_part).each { |rec| result_table[rec["id_organisms"]]["selected_isoforms"] = rec["count"]}
+		Exons.get_gene_match(request, id_org_part).each { |rec| result_table[rec["id_organisms"]]["total_exons"] = rec["count"]}
+		Introns.get_gene_match(request, id_org_part).each { |rec| result_table[rec["id_organisms"]]["total_introns"] = rec["count"]}
+		Isoforms.get_gene_match(request, id_org_part).each { |rec| result_table[rec["id_organisms"]]["selected_isoforms"] = rec["count"]}
 		Isoforms.get_all_org(id_org_part).each { |rec| result_table[rec["id_organisms"]]["isoforms"] = rec["count"]}
 
 	    result_table.each do |key, value|
@@ -49,8 +49,16 @@ class Genes < ApplicationRecord
 	    return id_org_part
 	end
 
+	def self.make_request_str(params_request)
+		request_str = ""
+		if !params_request.gsub("\"","").empty?
+			request = fix_true_false(params_request)
+			request_str = "(" +request+") AND "
+		end
+		return request_str
+	end
+
 	def self.fix_true_false(request)
-		puts "\n\n#{request}\n\n"
 	    request = request.gsub("protein_but_not_rna = 0","protein_but_not_rna = false")
 	    request = request.gsub("protein_but_not_rna = 1","protein_but_not_rna = true")
 	    request = request.gsub("protein_but_not_rna != 0","protein_but_not_rna != false")
@@ -60,9 +68,9 @@ class Genes < ApplicationRecord
 	end
 
 	def self.count_detailed_statistics(params)
-		request = fix_true_false(params["request"])
+		request = make_request_str(params[:request])
 	    id_org_part = org_part(JSON.parse(params["org_ids"]))
-	    match_genes_org_ids_request = "SELECT #{fields_for_select} FROM genes "+inner_join_for_org_name+" WHERE ((" +request+") AND ("+id_org_part+") AND ("+additional_gene_params+") )"
+	    match_genes_org_ids_request = "SELECT #{fields_for_select} FROM genes "+inner_join_for_org_name+" WHERE (" +request+" ("+id_org_part+") AND ("+additional_gene_params+") )"
 	    return Genes.connection.execute(match_genes_org_ids_request)
 	end
 
