@@ -125,9 +125,10 @@ $(document).on("turbolinks:load", function() {
     // movableCols: true,
     height:"700px",
     selectable:true,
+    tableBuilt:function(){
+      $("#organism_table").tabulator("selectRow");
+    },
   });
-
-
   var org_table_headers = $(".tabulator-col-title");
 
   for (var i = 0; i < org_table_headers.length; ++i) {
@@ -149,6 +150,8 @@ $(document).on("turbolinks:load", function() {
     rowSelectionChanged:function(data, rows){
       selected_organisms_ids = Array.prototype.map.call(data, function(x) { return x.id; });
       selected_organisms_names = Array.prototype.map.call(data, function(x) { return x.name + ", "; });
+      org_counter = selected_organisms_names.length
+      $("#total_org_counter").html("Total selected organisms: "+org_counter.toString())
       $('#selected_organisms_names').html(selected_organisms_names);
     },
   });

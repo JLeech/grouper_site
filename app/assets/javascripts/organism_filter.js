@@ -315,7 +315,7 @@ $(document).on("turbolinks:load", function() {
       new_data = tabledata;
     }
     $("#organism_table").tabulator("setData", new_data);
-
+    selectAfterTableRefresh();
   });
 
   $('#btn-set').on('click', function() {
@@ -363,6 +363,13 @@ $(document).on("turbolinks:load", function() {
 });
 
 
+function selectAfterTableRefresh(){
+  if ($("#btn-select")[0].classList.contains("btn-primary")){
+    $("#btn-select").click()
+  }else{
+    $("#organism_table").tabulator("selectRow");
+  }
+}
 // var span = document.getElementsByClassName("close")[0];
 
   // span.onclick = function() {
