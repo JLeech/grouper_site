@@ -3,7 +3,7 @@ function all_valid_for_intron() {
     var gene_valid = $('#gene-filter').queryBuilder('validate')
     var no_intron_rules = $('#intron-filter li').length == 0
     var intron_valid = $('#intron-filter').queryBuilder('validate')
-    return (( gene_valid || no_gene_rules ) & ( exon_valid || no_exon_rules ))
+    return (( gene_valid || no_gene_rules ) & ( intron_valid || no_intron_rules ))
 }
 
 $(document).on("turbolinks:load", function() {

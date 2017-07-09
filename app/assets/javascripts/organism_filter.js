@@ -367,6 +367,7 @@ function selectAfterTableRefresh(){
   if ($("#btn-select")[0].classList.contains("btn-primary")){
     $("#btn-select").click()
   }else{
+    console.log("xx")
     $("#organism_table").tabulator("selectRow");
   }
 }

@@ -123,7 +123,7 @@ $(document).on("turbolinks:load", function() {
     data: new_data,
     // movableRows: true,
     // movableCols: true,
-    height:"700px",
+    height:"600px",
     selectable:true,
     tableBuilt:function(){
       $("#organism_table").tabulator("selectRow");
@@ -144,6 +144,7 @@ $(document).on("turbolinks:load", function() {
   $('#clear_filter').on('click', function (e) {
     new_data = tabledata;
     $("#organism_table").tabulator("setData", new_data);
+    selectAfterTableRefresh(); // organism_filter.js
   });
 
   $("#organism_table").tabulator({
@@ -210,3 +211,5 @@ function column_hide(field_name, button, table) {
 //     // return $("#results").append(html);
 //   });
 // }
+
+// $("#organism_table").tabulator({setHeight:"100px"});
