@@ -61,7 +61,6 @@ $(document).on("turbolinks:load", function() {
       $("div#organism_table")[0].style.display = "none";
       return
     };
-
     $("div#gene_table")[0].style.display = "none";
     $("div#organism_table")[0].style.display = "none";
     

@@ -154,6 +154,11 @@ $(document).on("turbolinks:load", function() {
       org_counter = selected_organisms_names.length
       $("#total_org_counter").html("Total selected organisms: "+org_counter.toString())
       $('#selected_organisms_names').html(selected_organisms_names);
+      if (org_counter == 0){
+        disable_tabs()
+      }else{
+        enable_tabs()
+      }
     },
   });
 
@@ -175,6 +180,42 @@ $(document).on("turbolinks:load", function() {
 
 
 });
+
+function disable_tabs(){
+  var gene_btn = $("#gene-btn-apply")[0]
+  var exon_btn = $("#exon-btn-apply")[0]
+  var intron_btn = $("#intron-btn-apply")[0]
+  gene_btn.classList.add("disabled");
+  exon_btn.classList.add("disabled");
+  intron_btn.classList.add("disabled");
+  add_no_org_tooltip(gene_btn)
+  add_no_org_tooltip(exon_btn)
+  add_no_org_tooltip(intron_btn)
+}
+
+function enable_tabs(){
+  var gene_btn = $("#gene-btn-apply")[0]
+  var exon_btn = $("#exon-btn-apply")[0]
+  var intron_btn = $("#intron-btn-apply")[0]
+  gene_btn.classList.remove("disabled");
+  exon_btn.classList.remove("disabled");
+  intron_btn.classList.remove("disabled");
+  remove_no_org_tooltip(gene_btn)
+  remove_no_org_tooltip(exon_btn)
+  remove_no_org_tooltip(intron_btn)
+}
+
+function add_no_org_tooltip(elem){
+    elem.setAttribute("data-toggle","tooltip");
+    elem.setAttribute("data-placement","top");
+    elem.setAttribute("title","Select organisms to activate button");
+}
+
+function remove_no_org_tooltip(elem){
+    elem.removeAttribute("data-toggle");
+    elem.removeAttribute("data-placement");
+    elem.removeAttribute("title");
+}
 
 function column_hide(field_name, button, table) {
   if (button.classList.contains("active")){

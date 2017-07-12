@@ -16,9 +16,9 @@
           <li class="nav-item">
             <a class="nav-link" id="introns_select_tab" data-toggle="tab" href="#introns_settings" role="tab">Step 3.2. Select introns</a>
           </li>
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <a class="nav-link" id="ortho_select_tab" data-toggle="tab" href="#ortho_groups" role="tab">Orthology groups</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" id="reports_tab" data-toggle="tab" href="#reports" role="tab">Reports</a>
           </li>
@@ -30,15 +30,15 @@
             <div class="tab-pane" id="gene_settings" role="tabpanel">            
               <%= render "static_pages/genes/gene_select_tab" %>
             </div>
-            <div class="tab-pane" id="exons_settings" role="tabpanel">            
+            <div class="tab-pane" id="exons_settings" role="tabpanel">
               <%= render "static_pages/exons/exons_select_tab" %>
             </div>
             <div class="tab-pane" id="introns_settings" role="tabpanel">            
               <%= render "static_pages/introns/introns_select_tab" %>
             </div>
-            <div class="tab-pane" id="ortho_groups" role="tabpanel">            
+<!--             <div class="tab-pane" id="ortho_groups" role="tabpanel">            
               <%= render "static_pages/ortho/ortho_select_tab" %>
-            </div>
+            </div> -->
             <div class="tab-pane" id="reports" role="tabpanel">            
               <%= render "reports/in_tab" %>
             </div>

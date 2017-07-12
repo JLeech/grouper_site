@@ -3,7 +3,8 @@ function all_valid_for_exon() {
     var gene_valid = $('#gene-filter').queryBuilder('validate')
     var no_exon_rules = $('#exon-filter li').length == 0
     var exon_valid = $('#exon-filter').queryBuilder('validate')
-    return (( gene_valid || no_gene_rules ) & ( exon_valid || no_exon_rules ))
+    var is_disabled = $('#exon-btn-apply')[0].classList.contains("disabled")
+    return (( gene_valid || no_gene_rules ) & ( exon_valid || no_exon_rules ) & !is_disabled)
 }
 
 $(document).on("turbolinks:load", function() {
@@ -127,33 +128,33 @@ $(document).on("turbolinks:load", function() {
     }
   });
 
-  $('#exon-btn-apply').on('click', function(){
-    var gene_rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
-    var rules = JSON.stringify($('#exon-filter').queryBuilder('getSQL')["sql"], null, 2);
-    if (all_valid_for_exon()){
-      $.ajax({
-        contentType: "application/json",
-        url: '/apply_exon_query',
-        data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
-        async: true,
-        beforeSend: function() {
-          $("div#load-block").show();
-        },
-        error: function (err) {
-          $("div#load-block").hide();
-      }
-      }).done(function(data) {
-        $("#exon_table").tabulator("setData", data);
-        $("div#load-block").hide();
-      });
-    }
-  });
+  // $('#exon-btn-apply').on('click', function(){
+  //   var gene_rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
+  //   var rules = JSON.stringify($('#exon-filter').queryBuilder('getSQL')["sql"], null, 2);
+  //   if (all_valid_for_exon()){
+  //     $.ajax({
+  //       contentType: "application/json",
+  //       url: '/apply_exon_query',
+  //       data: {request: rules, gene_request: gene_rules, org_ids: JSON.stringify(selected_organisms_ids, null, 2), org_names: JSON.stringify(selected_organisms_names, null, 2) },
+  //       async: true,
+  //       beforeSend: function() {
+  //         $("div#load-block").show();
+  //       },
+  //       error: function (err) {
+  //         $("div#load-block").hide();
+  //     }
+  //     }).done(function(data) {
+  //       $("#exon_table").tabulator("setData", data);
+  //       $("div#load-block").hide();
+  //     });
+  //   }
+  // });
 
-  $('#exon-load-table-button').on('click', function (e) {
-    $("#gene_table").tabulator("download", "csv", "gene_table(small).csv");
-  });
+  // $('#exon-load-table-button').on('click', function (e) {
+  //   $("#gene_table").tabulator("download", "csv", "gene_table(small).csv");
+  // });
 
-  $('#exon-load-full-table-button').on('click', function (e){
+  $('#exon-btn-apply').on('click', function (e){
     var gene_rules = JSON.stringify($('#gene-filter').queryBuilder('getSQL')["sql"], null, 2);
     var rules = JSON.stringify($('#exon-filter').queryBuilder('getSQL')["sql"], null, 2);
 

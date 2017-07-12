@@ -2,7 +2,7 @@ require 'securerandom'
 
 class Reports < ApplicationRecord
 
-	CREATED = "created"
+	CREATED = "in queue"
 	INPROCESS = "in process"
 	TIMEOUT = "timeout"
 	ERROR = "error"

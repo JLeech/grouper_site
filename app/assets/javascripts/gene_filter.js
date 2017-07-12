@@ -129,7 +129,7 @@ $(document).on("turbolinks:load", function() {
     var rules_string = $('#gene-filter').queryBuilder('getSQL')["sql"]
     var rules = JSON.stringify(rules_string, null, 2);
     var no_rules = $('#gene-filter li').length == 0
-    if ($('#gene-filter').queryBuilder('validate') || no_rules){
+    if (($('#gene-filter').queryBuilder('validate') || no_rules) & !this.classList.contains("disabled")){
       $.ajax({
         contentType: "application/json",
         url: '/apply_gene_query',
