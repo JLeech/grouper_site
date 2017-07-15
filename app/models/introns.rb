@@ -9,7 +9,7 @@ class Introns < ApplicationRecord
         gene_request = Genes.make_request_str(params["gene_request"])
         intron_request = Exons.make_request_str(params["request"])
         id_org_part = Genes.org_part(JSON.parse(params["org_ids"]))
-        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} WHERE ( #{id_org_part} ) AND #{gene_request} ( #{Genes.additional_gene_params} AND #{intron_request} #{additional_intron_params} )"
+        request = "SELECT #{fields_for_select} FROM genes #{Genes.inner_join_for_org_name} #{inner_join_introns} #{left_join_introns_protein_id} #{inner_join_introns_types} WHERE ( #{id_org_part} ) AND #{gene_request} ( #{Genes.additional_gene_params} AND #{intron_request} #{additional_intron_params} )"
         return Exons.connection.execute(request)
     end
 
@@ -39,6 +39,14 @@ class Introns < ApplicationRecord
         return "INNER JOIN introns ON introns.id_genes = genes.id"
     end
 
+    def self.left_join_introns_protein_id
+       return "LEFT JOIN isoforms ON introns.id_isoforms = isoforms.id"
+    end
+
+    def self.inner_join_introns_types
+       return "INNER JOIN intron_types ON introns.id_intron_types = intron_types.id" 
+    end
+
     def self.fields_for_select
         pairs = detailed_fields.zip(human_fields_names)
         return pairs.map { |pair| "#{pair[0]} as #{pair[1]}" }.join(",")
@@ -46,17 +54,17 @@ class Introns < ApplicationRecord
 
     def self.detailed_fields
         return ["organisms.name","genes.name","genes.id_orthologous_groups","genes.ncbi_gene_id",
-            "introns.id_isoforms",
-            "introns.id_intron_types","introns.start_dinucleotide","introns.end_dinucleotide","introns.startt",
+            "isoforms.protein_id",
+            "intron_types.representation","introns.start_dinucleotide","introns.end_dinucleotide","introns.startt",
             "introns.endd","introns.lengthh","introns.indexx","introns.length_phase",
             "introns.phase","introns.warning_start_dinucleotide",
             "introns.warning_end_dinucleotide","introns.prev_exon","introns.next_exon",]
     end
 
     def self.human_fields_names
-        return ["organism_name","gene_name","gene_orthologous_groups","gene_ncbi_gene",
-            "isoform_id",
-            "intron_type","start_dinucleotide","end_dinucleotide","start",
+        return ["organism_name","gene_name","gene_orthologous_groups","gene_ncbi",
+            "isoform_protein_id",
+            "intron_phases","start_dinucleotide","end_dinucleotide","start",
             "end","length","indexx","length_phase",
             "phase","warning_start_dinucleotide",
             "warning_end_dinucleotide","prev_exon_id","next_exon_id"]

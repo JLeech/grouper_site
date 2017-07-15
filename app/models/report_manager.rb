@@ -16,8 +16,8 @@ class ReportManager
 
   def self.make_intron_report(params)
     report = create_report(params, "intron")
-    ReportManagerJob.perform_later report
-    #Reports.make_report(report)
+    #ReportManagerJob.perform_later report
+    Reports.make_report(report)
     return report
 
   end 
